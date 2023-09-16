@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Box, Input, InputGroup, InputRightAddon } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,6 +15,12 @@ import Mylogo from "../../Images/dream-park.png"
 
 const Header = () => {
   const navigate = useNavigate();
+//   const handleSignInNavigate=()=>{
+// navigate("/signIn")
+//   }
+//   const handleLoginNavigate=()=>{
+// navigate("/login")
+//   }
   return (
     <DIV>
       <div className="nav-top-box">
@@ -47,9 +53,9 @@ const Header = () => {
             </div>
             <div style={{ display: "flex", gap: "10px" }}>
               {/* <div color="gray.500"> */}
-                <p className="SignUp">New Register</p>
+                <p className="SignUp" onClick={()=>navigate("/signIn")} >New Register</p>
               {/* </div> */}
-              <p color="gray.500" className="SignUp">
+              <p color="gray.500" className="SignUp" onClick={()=>navigate("/login")} >
                 Log In
               </p>
             </div>

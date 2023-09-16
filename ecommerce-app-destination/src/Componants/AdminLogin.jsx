@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-// import './RegistrationForm.css';
+// import './AdminLogin.css';
 import styled from "styled-components"
-import {useNavigate,Link} from "react-router-dom"
-
-function Login() {
+import { useNavigate,Link } from 'react-router-dom';
+function AdminLogin() {
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -88,7 +87,7 @@ function Login() {
         /> */}
         <button type="submit">LOGIN</button>
         <div className='already-account'>
-        <h1>Create Account 👉<Link className="link" to="/signIn">signup here</Link></h1>
+        <h1>Create Account 👉<Link className="link" to="/adminregister">signup here</Link></h1>
       </div>
       </form>
     </div>
@@ -96,15 +95,15 @@ function Login() {
   );
 }
 
-export default Login;
+export default AdminLogin;
 
 
 const DIV=styled.div`
 border: 0px solid red;
 /* height: 60vh; */
-padding: 2rem;
 width: 90%;
 margin:2rem auto;
+padding: 2rem;
 color: #000000d6;
 background-image: url("https://img.freepik.com/free-vector/online-shopping-landing-page_33099-1725.jpg");
 

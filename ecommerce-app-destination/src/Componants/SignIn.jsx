@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 // import './RegistrationForm.css';
 import styled from "styled-components"
 import {useNavigate,Link} from "react-router-dom"
-
-function Login() {
+function RegistrationForm() {
+  const navigate= useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -25,6 +25,7 @@ function Login() {
     e.preventDefault();
     // You can add form validation and submission logic here
     console.log(formData);
+    navigate("/login")
   };
 
 
@@ -34,18 +35,18 @@ function Login() {
    
       <form className="registration-form" onSubmit={handleSubmit}>
          <div className='extra-suggesion'>
-          <h1>Your gateway to exclusive offers and personalized shopping awaits. Login now!</h1>
+          <h1>Your gateway to exclusive offers and personalized shopping awaits. Register now!</h1>
         </div>
-        {/* <input
+        <input
           type="text"
           name="name"
           placeholder="Name"
           value={formData.name}
           onChange={handleChange}
           required
-        /> */}
+        />
       
-        {/* <input
+        <input
           type="number"
           name="age"
           placeholder="Age"
@@ -53,15 +54,15 @@ function Login() {
           onChange={handleChange}
           required
         />
-         */}
-        {/* <input
+        
+        <input
           type="text"
           name="city"
           placeholder="City"
           value={formData.city}
           onChange={handleChange}
           required
-        /> */}
+        />
         <input
           type="email"
           name="email"
@@ -78,17 +79,17 @@ function Login() {
           onChange={handleChange}
           required
         />
-        {/* <input
+        <input
           type="password"
           name="confirmPassword"
           placeholder="Confirm Password"
           value={formData.confirmPassword}
           onChange={handleChange}
           required
-        /> */}
-        <button type="submit">LOGIN</button>
+        />
+        <button type="submit">Register</button>
         <div className='already-account'>
-        <h1>Create Account 👉<Link className="link" to="/signIn">signup here</Link></h1>
+        <h1>Already account 👉<Link className="link" to="/login">Login here</Link></h1>
       </div>
       </form>
     </div>
@@ -96,7 +97,7 @@ function Login() {
   );
 }
 
-export default Login;
+export default RegistrationForm;
 
 
 const DIV=styled.div`
