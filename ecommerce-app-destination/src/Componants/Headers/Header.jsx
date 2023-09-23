@@ -55,7 +55,7 @@ const Header = () => {
               {/* <div color="gray.500"> */}
                 <p className="SignUp" onClick={()=>navigate("/signIn")} >New Register</p>
               {/* </div> */}
-              <p color="gray.500" className="SignUp" onClick={()=>navigate("/login")} >
+              <p color="gray.500" className="SignUp" onClick={()=>navigate("/login-path")} >
                 Log In
               </p>
             </div>
@@ -78,7 +78,7 @@ const Header = () => {
 
           <div className="cart-symbole" style={{ display: "flex", gap: "12px",justifyContent:"center"}}>
             <InputGroup size="sm" alignItems="center">
-              <Input className="search-input" placeholder="Search anthologie" pt={4} pb={4}/>
+              <Input className="search-input" placeholder="Search your product" pt={4} pb={4}/>
               <InputRightAddon
                 padding={4}
                 fontSize={20}
@@ -87,7 +87,7 @@ const Header = () => {
               />
             </InputGroup>
             <Box
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/cart")}
               className="cart-icon"
               p={6}
               fontSize={25}

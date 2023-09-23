@@ -8,6 +8,10 @@ import {Routes,Route} from "react-router-dom"
 import Product from './Product'
 // import SignIn from '../Componants/SignIn'
 import RegistrationForm from '../Componants/SignIn'
+import SelectLogin from '../Componants/SelectLogin'
+import AdminProductPage from './AdminProductPage'
+import Cart from './Cart'
+import SingleProduct from './SingleProduct'
 
 const MainRoute = () => {
   return (
@@ -18,7 +22,11 @@ const MainRoute = () => {
         <Route path="/adminlogin" element={<AdminLogin/>} />
         <Route path="/signIn" element={<RegistrationForm/>} />
         <Route path="/adminregister" element={<AdminRegister/>} />
+        <Route path="/login-path" element={<SelectLogin/>} />
         <Route path="*" element={< PageNotFound/>} />
+        <Route path="/cart" element={< Cart/>} />
+        <Route path="/product/:id" element={<SingleProduct/>} />
+        <Route path="/productmodify" element={<AdminProductPage/>} />
         <Route path="/product" element={< Product/>} />
      </Routes>
     </div>

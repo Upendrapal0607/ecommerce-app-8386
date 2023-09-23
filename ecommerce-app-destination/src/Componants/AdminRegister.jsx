@@ -2,22 +2,26 @@ import React, { useState } from 'react';
 // import './RegistrationForm.css';
 import styled from "styled-components"
 import {useNavigate,Link} from "react-router-dom"
+import axios from 'axios';
+import { AdminUrl } from '../Url/Url';
+const initialData={
+  name: '',
+  age: '',
+  city: '',
+  email: '',
+  password: '',
+  gender:''
+}
 function AdminRegister() {
   const navigate= useNavigate()
-  const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    city: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
+  const [pass,setPass]=useState("")
+  const [formData, setFormData] = useState(initialData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]:name=="age"?+value:value,
     });
   };
 
@@ -25,7 +29,16 @@ function AdminRegister() {
     e.preventDefault();
     // You can add form validation and submission logic here
     console.log(formData);
-    navigate("/login")
+    if(pass!=formData.password){
+      alert("Your password is not match")
+    }else{
+    axios.post(`${AdminUrl}/register`,formData).then(res=>{
+      console.log("register res",res);
+      alert(res.data.message)
+      navigate("/adminlogin")
+    })
+    setFormData(initialData)
+    }
   };
 
 
@@ -35,7 +48,7 @@ function AdminRegister() {
    
       <form className="registration-form" onSubmit={handleSubmit}>
          <div className='extra-suggesion'>
-          <h1>Your gateway to exclusive offers and personalized shopping awaits. Register now!</h1>
+          <h1>Empower your e-commerce journey as an admin. Register today and take charge of your online store.</h1>
         </div>
         <input
           type="text"
@@ -63,6 +76,12 @@ function AdminRegister() {
           onChange={handleChange}
           required
         />
+         <select name="gender" value={formData.gender}  onChange={handleChange} id="" placeholder='Select Gender'>
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="kids">Kids</option>
+        </select>
         <input
           type="email"
           name="email"
@@ -73,17 +92,17 @@ function AdminRegister() {
         />
         <input
           type="password"
-          name="password"
+          name="pass"
           placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
+          value={formData.pass}
+          onChange={e=>setPass(e.target.value)}
           required
         />
         <input
           type="password"
-          name="confirmPassword"
+          name="password"
           placeholder="Confirm Password"
-          value={formData.confirmPassword}
+          value={formData.password}
           onChange={handleChange}
           required
         />
@@ -104,7 +123,7 @@ export default AdminRegister;
 const DIV=styled.div`
 border: 0px solid red;
 /* height: 60vh; */
-padding: 2rem;
+padding:2rem 0rem;
 /* overscroll-behavior-y: -2; */
 width: 90%;
 margin:2rem auto;
@@ -114,7 +133,7 @@ background-image: url("https://img.freepik.com/free-vector/online-shopping-landi
 .extra-suggesion{
 font-size:18px;
 font-weight: 500;
-color:#4c00ff;
+color:#6b5697;
 padding: 1rem 0rem;
 width: 70%;
 /* text-align: center; */
@@ -143,7 +162,7 @@ flex-direction: column;
   background-color: rgb(249, 249, 249);
 }
 
-input {
+input ,select{
     /* line:1px solid #007bff; */
 
   margin-bottom: 10px;

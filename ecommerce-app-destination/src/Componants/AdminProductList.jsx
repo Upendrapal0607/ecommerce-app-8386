@@ -1,0 +1,125 @@
+import React from 'react'
+import styled from 'styled-components'
+
+const AdminProductList = ({data,handleEdit,HandleDelete}) => {
+  // console.log({data});
+
+  return (
+    <DIV>
+      <div className='table-formate'>
+       <p>SN.</p>
+       <p>Image</p>
+       <p>Name</p>
+       <p>Price</p>
+       <p>Rating</p>
+       <p>EDIT/DELTE</p>
+       <div>
+    
+       </div>
+      </div>
+      {data?.map((el,index)=><div className="data-card" key={el._id}>
+      <div className='data-name'>
+        <h1>{index+1}</h1>
+        </div>
+        <div className="data-image"><img src={el.image} alt="img" /></div>
+        <div className='data-name'>
+        <h1>{el.name}</h1>
+        </div>
+        <div className='data-price'>
+        <p>{el.price}</p>
+        </div>
+        <div className="data-rating">
+        <p>{el.rating}</p>
+        </div>
+        <div className="edit-delete-btn">
+        <button onClick={()=>handleEdit(el._id)}>EDIT</button>
+        <button onClick={()=>HandleDelete(el._id)}>DELETE</button>
+        </div>
+        </div>)}
+    </DIV>
+  )
+}
+
+export default AdminProductList
+
+const DIV=styled.div`
+border:2px solid red;
+width:100%;
+display:flex;
+flex-direction: column;
+gap: .5rem;
+/* border: 4px solid red; */
+/* height: 60vh; */
+padding:2rem 0rem;
+/* overscroll-behavior-y: -2; */
+/* width: 40%; */
+margin:2rem auto;
+color: #000000d6;
+.table-formate{
+border: 2px solid green;
+display: flex;
+justify-content: space-between;
+align-items: center;
+/* border-left: 1px solid black; */
+}
+.table-formate>p{
+  width:17%;
+  border: 1px solid #000;
+  margin: auto;
+  text-align: center;
+  padding:.5rem;
+  /* padding: 0px 0px 0px 30px; */
+
+}
+.table-formate:nth-child(last){
+  width: 20%;
+}
+/* .table-formate>div{
+  width: 20%;
+} */
+
+.data-card{
+  justify-content: space-between;
+  align-items: center;
+  border:2px solid magenta;
+  display: flex;
+}
+
+
+.data-image>img{
+  width:80%;
+}
+.data-image,.data-name,.data-price,.data-rating,.edit-delete-btn{
+  border: 0px solid blue;
+  width: 15%;
+  text-align: center;
+}
+.data-image{
+  width: 10%;
+}
+.edit-delete-btn{
+  display: flex;
+  gap:.2rem;
+  align-items: center;
+  justify-content: center;
+}
+.edit-delete-btn>button{
+  border:0px solid blue;
+    font-size: 16px;
+    font-weight: 500;
+    padding: .2rem .4rem;
+
+    width:6rem;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #00000092;
+color:#fff;
+}
+.edit-delete-btn>button:hover{
+  background-color: #000000e4;
+}
+@media only screen and (min-width: 280px) and (max-width: 667px) {
+    width: 100%;
+}
+
+`

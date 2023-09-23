@@ -6,13 +6,13 @@ export function MothersDayImage(){
     return  <div>
     <div className='mother-image-poster' style={{marginBottom:"30px"}}>
         <div className='image-poster-box'><img src={motherimage1} alt="" />
-      <div style={{marginTop:"-50px"}}>
-      <button style={{padding:"1% 12%",backgroundColor:"white"}}>Mother's Day Gift</button>
+      <div className="botton-text">
+      <button style={{padding:"1% 12%"}}>Mother's Day Gift</button>
       </div>
         </div>
         <div className='image-poster-box'><img src={motherimage2} alt="" />
-    <div style={{marginTop:"-50px"}}>
-      <button style={{padding:"1% 12%",backgroundColor:"white"}}>Shop Wedding</button>
+    <div className="botton-text">
+      <button style={{padding:"1% 12%"}}>Shop Wedding</button>
       </div>
         </div>
     </div>
@@ -20,8 +20,8 @@ export function MothersDayImage(){
         <div>
   <img src="https://images.ctfassets.net/5de70he6op10/2XUxhNlu24HaHTFRAghRS3/f30d5364574fc72b718e910f087b2685/484733194-ls_m5a.jpg?w=2640&q=80&fm=webp" alt="" />
         </div>
-        <div style={{marginTop:"-50px"}}>
-      <button className='new-clothing-btn' style={{padding:"5px 4%",backgroundColor:"white"}}>Shop New Clothing</button>
+        <div className="botton-text">
+      <button className='new-clothing-btn' style={{padding:"5px 4%"}}>Shop New Clothing</button>
       </div>
     </div>
 

@@ -103,7 +103,7 @@ export default RegistrationForm;
 const DIV=styled.div`
 border: 0px solid red;
 /* height: 60vh; */
-padding: 2rem;
+padding:2rem 0rem;
 width: 90%;
 margin:2rem auto;
 color: #000000d6;
@@ -112,7 +112,7 @@ background-image: url("https://img.freepik.com/free-vector/online-shopping-landi
 .extra-suggesion{
 font-size:18px;
 font-weight: 500;
-color:#4c00ff;
+color:#6b5697;
 padding: 1rem 0rem;
 width: 70%;
 

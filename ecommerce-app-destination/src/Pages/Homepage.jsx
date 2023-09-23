@@ -11,7 +11,7 @@ import { Slider1, Slider2, SliderSpacer2 } from '../Componants/MultipleLandingPa
 const Homepage = () => {
   return (
     <div>
-      <TopPoster />
+      <TopPoster /> 
         <ImagePoster />
         <BigSmallPoster />
         <MothersDayImage />
@@ -20,7 +20,7 @@ const Homepage = () => {
 <SliderSpacer2/>
  <Slider2 /> 
  <SliderSpacer2 /> 
-<MoretoExplore />
+<MoretoExplore /> 
     </div>
   )
 }

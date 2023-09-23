@@ -7,7 +7,7 @@ import logo2 from "../../Images/Refarmation.jpg"
 import "./Landing.css";
 export function TopPoster() {
     const navigate = useNavigate()
-  
+  console.log({logo1,logo2});
       return (
           <div>
           <div onClick={()=>navigate("/Product")} className='Poster1-Image'>

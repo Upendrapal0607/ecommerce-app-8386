@@ -1,11 +1,13 @@
 import React from 'react'
+import SideNavbar from '../Componants/Headers/SideNavbar'
+import AllProduct from '../Componants/AllProduct'
 
 const Product = () => {
   return (
     <div>
       <div>
-        <div>sideBar</div>
-        <div>All Product</div>
+        <SideNavbar />
+       <AllProduct />
       </div>
     </div>
   )

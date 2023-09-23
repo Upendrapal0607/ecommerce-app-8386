@@ -36,6 +36,22 @@
   
       }
     
+      .botton-text{
+        border: 0px solid red;
+        text-align: center;
+        margin-top:-50px ;
+      }
+      .botton-text>button{
+       padding:2% 15%;
+       background-color:white;
+       border-radius: 5px;
+      }
+  
+      .botton-text>button:hover{
+        color: #EEEEEE;
+        background-color:#000;
+        
+      }
   
       .image-poster{
        width: 90%;

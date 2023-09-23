@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 // import './AdminLogin.css';
 import styled from "styled-components"
 import { useNavigate,Link } from 'react-router-dom';
+import axios from 'axios';
+import { AdminUrl } from '../Url/Url';
+
+const initialData={
+  email: '',
+  password: '',
+ 
+}
 function AdminLogin() {
-  const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    city: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
+    const navigate=useNavigate()
+  const [formData, setFormData] = useState(initialData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +25,19 @@ function AdminLogin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // You can add form validation and submission logic here
-    console.log(formData);
+    axios.post(`${AdminUrl}/login`,formData).then(res=>{
+      console.log(res.data);
+      if(res.data.message=="login successful"){
+        alert(res.data.message)
+        localStorage.setItem("token",JSON.stringify(res.data.token))
+        navigate("/productmodify")
+      }else{
+        alert(res.data.message)
+      }
+
+      setFormData(initialData)
+    })
+    // console.log(formData);
   };
 
 
@@ -33,7 +47,7 @@ function AdminLogin() {
    
       <form className="registration-form" onSubmit={handleSubmit}>
          <div className='extra-suggesion'>
-          <h1>Your gateway to exclusive offers and personalized shopping awaits. Login now!</h1>
+          <h1>Admins, your portal to e-commerce excellence awaits. Log in to rejoin the battlefield and take control of your online shopping empire.</h1>
         </div>
         {/* <input
           type="text"
@@ -103,14 +117,14 @@ border: 0px solid red;
 /* height: 60vh; */
 width: 90%;
 margin:2rem auto;
-padding: 2rem;
+padding:2rem 0rem;
 color: #000000d6;
 background-image: url("https://img.freepik.com/free-vector/online-shopping-landing-page_33099-1725.jpg");
 
 .extra-suggesion{
 font-size:18px;
 font-weight: 500;
-color:#4c00ff;
+color:#6b5697;
 padding: 1rem 0rem;
 width: 70%;
 
