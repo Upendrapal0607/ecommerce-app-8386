@@ -26,10 +26,10 @@ const AdminProductList = ({data,handleEdit,HandleDelete}) => {
         <h1>{el.name}</h1>
         </div>
         <div className='data-price'>
-        <p>{el.price}</p>
+        <p> {`${el.price}.00 ₹`}</p>
         </div>
         <div className="data-rating">
-        <p>{el.rating}</p>
+        <p>{el.rating==1?"★":el.rating==2?"★★":el.rating==3?"★★★":el.rating==4?"★★★★":el.rating==5?"★★★★★":"★★★★★★"}</p>
         </div>
         <div className="edit-delete-btn">
         <button onClick={()=>handleEdit(el._id)}>EDIT</button>
@@ -43,20 +43,20 @@ const AdminProductList = ({data,handleEdit,HandleDelete}) => {
 export default AdminProductList
 
 const DIV=styled.div`
-border:2px solid red;
+border:0px solid red;
 width:100%;
 display:flex;
 flex-direction: column;
 gap: .5rem;
 /* border: 4px solid red; */
 /* height: 60vh; */
-padding:2rem 0rem;
+padding:0rem 0rem;
 /* overscroll-behavior-y: -2; */
 /* width: 40%; */
 margin:2rem auto;
 color: #000000d6;
 .table-formate{
-border: 2px solid green;
+border: 0px solid green;
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -81,7 +81,7 @@ align-items: center;
 .data-card{
   justify-content: space-between;
   align-items: center;
-  border:2px solid magenta;
+  border:2px solid #0000007d;
   display: flex;
 }
 
@@ -120,6 +120,26 @@ color:#fff;
 }
 @media only screen and (min-width: 280px) and (max-width: 667px) {
     width: 100%;
+    .table-formate{
+ display: none;
+    }
+    .data-card{
+      flex-direction: column;
+    }
+    .data-image{
+width: 70%;
+    }
+  .data-name,.data-price,.data-rating,.edit-delete-btn{
+  border: 0px solid blue;
+  width: 100%;
+  text-align: center;
+}
+.data-image>img{
+  width:100%;
+}
+/* .edit-delete-btn{
+  width: 100%;
+} */
 }
 
 `

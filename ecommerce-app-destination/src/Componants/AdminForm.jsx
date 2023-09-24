@@ -66,14 +66,23 @@ function AdminForm({handleAdd}) {
           onChange={handleChange}
           required
         />
-        <input
+         <select name="rating" value={formData.rating} onChange={handleChange} id="" placeholder='Select Rating'>
+          <option value="">Select Rating</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+        {/* <input
           type="number"
           name="rating"
           placeholder="Rating"
           value={formData.rating}
           onChange={handleChange}
           required
-        />
+        /> */}
         <input
           type="number"
           name="price"
@@ -111,13 +120,14 @@ export default AdminForm;
 
 
 const DIV=styled.div`
-border: 4px solid red;
+border: 0px solid red;
 /* height: 60vh; */
 padding:2rem 0rem;
 /* overscroll-behavior-y: -2; */
 width: 30%;
 margin:2rem auto;
 color: #000000d6;
+position: relative;
 /* background-image: url("https://img.freepik.com/free-vector/online-shopping-landing-page_33099-1725.jpg"); */
 
 .extra-suggesion{
@@ -126,12 +136,12 @@ font-weight: 500;
 color:#6b5697;
 padding: 1rem 0rem;
 /* width: 100%; */
-border:2px solid green;
+border:0px solid green;
 /* text-align: center; */
 
 }
 .registration-container {
-  border:2px solid green;
+  border:0px solid green;
   display: flex;
   flex-direction: column;
   width:100%;

@@ -6,6 +6,8 @@ import {useDispatch,useSelector} from "react-redux"
 import styled from 'styled-components'
 import { AddProduct, DeletelProduct, getAllProduct, updateProduct } from '../Redux/ProductReducer/Action'
 import UpdateData from '../Componants/UpdateData'
+import Loader from '../Componants/Loader'
+import ErrorLoad from '../Componants/ErrorLoad'
 
 const AdminProductPage = () => {
   const dispatch=useDispatch()
@@ -17,7 +19,7 @@ const AdminProductPage = () => {
 const [page,setPage]=React.useState(1)
 
 
-const [limit,setLimit]=React.useState(10)
+const [limit,setLimit]=React.useState(8)
 
 React.useEffect(()=>{
 dispatch(getAllProduct({limit,page}))
@@ -83,30 +85,37 @@ dispatch(updateProduct(DataId,PostData))
 
   return (
     <DIV>
+      {data?.isError?< ErrorLoad/>:<div className='main-box'>
      {isUpdate?<UpdateData id={DataId} setIsUpdate={setIsUpdate} handleUpdata={handleUpdata} />:<AdminForm handleAdd={handleAdd}/>}
       <div className='product-page'>
-      <AdminProductList data={data.Product.data} handleEdit={handleEdit} HandleDelete={HandleDelete}/>
+      {data?.isLoading? <Loader />:<AdminProductList data={data.Product.data} handleEdit={handleEdit} HandleDelete={HandleDelete}/>}
       <div className='btn-box'>
        <button disabled={page==1}  onClick={()=>setPage(page-1)} className="page-btn">{"<"}</button>
        <button className="page-btn">{page}</button>
        <button disabled={page==data.Product.totalPages} onClick={()=>setPage(page+1)} className="page-btn">{">"}</button>
       </div>
       </div>
-      
+    </div>}
     </DIV>
   )
 }
 
 export default AdminProductPage
 const DIV= styled.div`
-  display:flex;
+  /* display:flex;
   justify-content: space-between;
-  border: 2px solid blue;
+  border: 0px solid blue;
+  gap: 1rem; */
+  .main-box{
+width:100%;
+display:flex;
+  justify-content: space-between;
+  border: 0px solid blue;
   gap: 1rem;
-
+  }
   .product-page{
-    border: 2px solid blue;
-    width: 60%;
+    border: 0px solid blue;
+    width: 65%;
     padding:1rem 0rem;
 /* overscroll-behavior-y: -2; */
 /* width: 30%; */
@@ -146,7 +155,10 @@ color:#fff;
 
   }
   @media only screen and (min-width: 280px) and (max-width: 667px) {
-    flex-direction: column;
+    /* flex-direction: column; */
+     .main-box{
+       flex-direction: column;
+     }
     .product-page{
       width: 100%;
       padding:0rem 0rem;
@@ -160,6 +172,9 @@ color:#fff;
     width:2rem;
 
   }
+  /* .btn-box{
+    flex-wrap: wrap;
+  } */
 
   }
 `

@@ -2,6 +2,7 @@ import styled from "styled-components";
 // import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Select } from "@chakra-ui/react";
 
 const SideNavbar = () => {
 //   const [searchParams, setSearchParams] = useSearchParams();
@@ -69,6 +70,7 @@ useEffect(()=>{
 
   return (
     <DIV>
+      <div>
       <h3 className="Filter-type">Sort Based on Price</h3>
       <div>
         <input
@@ -92,7 +94,8 @@ useEffect(()=>{
         />
         <label>Descending</label>
       </div>
-
+      </div>
+      <div>
       <h3 className="Filter-type">Filter By Gender</h3>
       <div>
         <input
@@ -124,24 +127,18 @@ useEffect(()=>{
           value="kids"
           id=""
           checked={gender.includes("kids")}
-        />
+          />
         <label> Kids</label>
       </div>
-
-      <h3 className="Filter-type">Filter By Color</h3>
-      {/* <select name="" id="" className="select-tag">
-        <optoin>Red</optoin>
-        <optoin></optoin>
-        <optoin></optoin>
-        <optoin></optoin>
-        <optoin></optoin>
-        <optoin></optoin>
-        <optoin></optoin>
-        <optoin></optoin>
-        <optoin></optoin>
-        <optoin></optoin>
-      </select> */}
-
+      </div>
+     <div>
+      <h3 className="Filter-type">Filter By Category</h3>
+      <Select placeholder='Select option'>
+  <option value='option1'>Option 1</option>
+  <option value='option2'>Option 2</option>
+  <option value='option3'>Option 3</option>
+</Select>
+      </div>
       {/* <div>
         <input type="checkbox" name="" value="black" id="" />
         <label> Black</label>
@@ -170,8 +167,14 @@ useEffect(()=>{
         <input type="checkbox" name="" value="yellow" id="" />
         <label> Yellow</label>
       </div> */}
-
+<div>
       <h3 className="Filter-type">Filter By Category</h3>
+      <Select placeholder='Select option'>
+  <option value='option1'>Option 1</option>
+  <option value='option2'>Option 2</option>
+  <option value='option3'>Option 3</option>
+</Select>
+</div>
      
 
       {/* <div>
@@ -221,14 +224,36 @@ const DIV = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px;
-  gap: 7px;
-  position: relative;
+  padding: 10px;
+  margin:auto;
+  gap: 7px; 
+  /* position: relative; */
   /* top: 100px;
   position: sticky; */
 
   .Filter-type {
     font-size: 16px;
     font-weight: 500;
+    width: 100%;
+    border:0px solid red;
+  
+  } 
+  .select-tag {
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    border:2px solid red;
+    color:black;
+  
+  }
+
+  @media only screen and (min-width: 280px) and (max-width: 667px) {
+    display: grid;
+    /* justify-content: space-between; */
+grid-template-columns: repeat(2,1fr);
+    /* flex-direction: row; */
+    width: 100%;
+    border-bottom: 2px solid #120d0d;
+    border-right: 0px solid #120d0d;
   }
 `;

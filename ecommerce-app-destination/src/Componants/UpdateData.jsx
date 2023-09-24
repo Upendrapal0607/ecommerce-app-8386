@@ -96,7 +96,7 @@ export default UpdateData;
 
 
 const DIV=styled.div`
-border: 4px solid red;
+border: 0px solid red;
 /* height: 60vh; */
 padding:2rem 0rem;
 /* overscroll-behavior-y: -2; */
