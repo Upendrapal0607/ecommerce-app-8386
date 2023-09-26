@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { Box, Input, InputGroup, InputRightAddon } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,15 +12,32 @@ import {
 
 // import logo from "./../Images/DREAM-PARK.png"
 import Mylogo from "../../Images/dream-park.png"
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
-//   const handleSignInNavigate=()=>{
-// navigate("/signIn")
-//   }
-//   const handleLoginNavigate=()=>{
-// navigate("/login")
-//   }
+  const {isAuth}= useSelector(state=>state.UserReducer)
+  // console.log({isAuth});
+  const [SearchPrarams2,setSeachParams2]=useSearchParams();
+  let initialSearch= SearchPrarams2.get("q")
+const [q,setQuery] = useState(initialSearch||"")
+
+
+const handleSearch=()=>{
+     let QueryParam2={}
+     q&&(QueryParam2.q=q)
+     setSeachParams2(QueryParam2)
+}
+  
+
+const handleSearchParams= (e)=>{
+const {value}= e.target;
+setQuery(value)
+  }
+const handleLogOut=()=>{
+
+}
+
   return (
     <DIV>
       <div className="nav-top-box">
@@ -51,14 +68,20 @@ const Header = () => {
             <div style={{ fontSize: "20px" }}>
               <FontAwesomeIcon icon={faUser} />
             </div>
-            <div style={{ display: "flex", gap: "10px" }}>
-              {/* <div color="gray.500"> */}
-                <p className="SignUp" onClick={()=>navigate("/signIn")} >New Register</p>
-              {/* </div> */}
-              <p color="gray.500" className="SignUp" onClick={()=>navigate("/login-path")} >
-                Log In
+           {isAuth?<div style={{ display: "flex", gap: "10px" }}>
+             
+                <p className="SignUp" > {JSON.parse(localStorage.getItem("userName"))}</p>
+              <p color="gray.500" className="SignUp" onClick={handleLogOut} >
+               LOGOUT
               </p>
-            </div>
+            </div>:<div style={{ display: "flex", gap: "10px" }}>
+             
+             <p className="SignUp" onClick={()=>navigate("/signIn")} >New Register</p>
+       
+           <p color="gray.500" className="SignUp" onClick={()=>navigate("/login-path")} >
+             Log In
+           </p>
+         </div>}
           </div>
         </div>
       </div>
@@ -78,8 +101,8 @@ const Header = () => {
 
           <div className="cart-symbole" style={{ display: "flex", gap: "12px",justifyContent:"center"}}>
             <InputGroup size="sm" alignItems="center">
-              <Input className="search-input" placeholder="Search your product" pt={4} pb={4}/>
-              <InputRightAddon
+              <Input className="search-input" value={q} onChange={handleSearchParams} placeholder="Search your product" pt={4} pb={4}/>
+              <InputRightAddon onClick={handleSearch}
                 padding={4}
                 fontSize={20}
                 cursor={"pointer"}

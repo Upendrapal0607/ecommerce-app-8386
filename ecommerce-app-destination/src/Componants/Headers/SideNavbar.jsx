@@ -5,32 +5,26 @@ import { useEffect, useState } from "react";
 import { Select } from "@chakra-ui/react";
 
 const SideNavbar = () => {
-//   const [searchParams, setSearchParams] = useSearchParams();
 const [SearchPrarams,setSeachParams]=useSearchParams();
 let initialGender=SearchPrarams.getAll("gender");
 const [gender,setGender]=useState(initialGender||[]);
-let initialCategory=SearchPrarams.getAll("category");
-const [category,setCategory]=useState(initialCategory||[]);
-let initialSortParams = SearchPrarams.get("sortby");
+let initialCategory=SearchPrarams.get("category");
+const [category,setCategory]=useState(initialCategory||"");
+let initialRating= SearchPrarams.get("Rating")
+const [rating,setRating] = useState(initialRating||"")
+let initialSortParams = SearchPrarams.get("sortBy");
 const [sortBy, setSortBy] = useState(initialSortParams || "");
-console.log(SearchPrarams)
-// console.log("initialSortPrice",initialSortParams);
-//   let initialParams = searchParams.getAll("gender");
-//   const [gender, setGender] = useState(initialParams || []);
-//   let initialCategoryParams = searchParams.getAll("category");
-//   const [category, setCategory] = useState(initialCategoryParams || []);
 
-//   let initialSortParams = searchParams.get("sortBy");
-//   const [sortBy, setSortBy] = useState(initialSortParams || "");
 
 useEffect(()=>{
   let Params={};
   category&&(Params.category=category)
   gender&&(Params.gender=gender)
-  sortBy&&(Params.sortby=sortBy)
-
+  sortBy&&(Params.sortBy=sortBy)
+  rating&&(Params.rating=rating)
   setSeachParams(Params);
-},[category,gender,sortBy])
+},[category,gender,sortBy,rating])
+
   const handleGenderFilter = (e) => {
     const {value}=e.target;
     let NewGender=[...gender];
@@ -41,21 +35,23 @@ useEffect(()=>{
         NewGender.push(value)
     }
     setGender(NewGender)
-//     const { value } = e.target;
-//     let newGender = [...gender];
-//     if (newGender.includes(value))
-//       newGender = newGender.filter((el) => el != value);
-//     else newGender.push(value);
-//     setGender(newGender);
+
   };
 
-  const handleCategoryFilter = (e) => {
+  const handleRatingFilter = (e) => {
+    const { value } = e.target;
+    value == rating ? setRating(null) : setRating(value);
 
-    const {value}=e.target;
-    let NewCategory=[...category];
-    if(NewCategory.includes(value)) NewCategory=NewCategory.filter(item=>item!=value);
-    else NewCategory.push(value);
-    setCategory(NewCategory)
+    }
+
+  const handleCategoryFilter = (e) => {
+    const { value } = e.target;
+    value == category ? setCategory(null) : setCategory(value);
+    // const {value}=e.target;
+    // let NewCategory=[...category];
+    // if(NewCategory.includes(value)) NewCategory=NewCategory.filter(item=>item!=value);
+    // else NewCategory.push(value);
+    // setCategory(NewCategory)
 //     const { value } = e.target;
 //     let newCategory = [...category];
 //     if (newCategory.includes(value))
@@ -133,10 +129,12 @@ useEffect(()=>{
       </div>
      <div>
       <h3 className="Filter-type">Filter By Category</h3>
-      <Select placeholder='Select option'>
-  <option value='option1'>Option 1</option>
-  <option value='option2'>Option 2</option>
-  <option value='option3'>Option 3</option>
+      <Select onChange={handleCategoryFilter} name="category" placeholder='Select Category'>
+  <option value='belt'>Belt</option>
+  <option value='cloth'>Cloth</option>
+  {/* <option value='jewelary'></option> */}
+  <option value='shoes'>Shoes</option>
+  <option value='jewelary'>Jewelary</option>
 </Select>
       </div>
       {/* <div>
@@ -168,11 +166,14 @@ useEffect(()=>{
         <label> Yellow</label>
       </div> */}
 <div>
-      <h3 className="Filter-type">Filter By Category</h3>
-      <Select placeholder='Select option'>
-  <option value='option1'>Option 1</option>
-  <option value='option2'>Option 2</option>
-  <option value='option3'>Option 3</option>
+      <h3  className="Filter-type">Filter By Rating</h3>
+      <Select onChange={handleRatingFilter} placeholder='Select Rating'>
+  <option value='1'>Lowest Rating</option>
+  <option value='2'>Rating 2</option>
+  <option value='3'>Rating 3</option>
+  <option value='4'>Rating 4</option>
+  <option value='5'>Rating 5</option>
+  <option value='6'>Highest Rating</option>
 </Select>
 </div>
      
@@ -225,7 +226,7 @@ const DIV = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 10px;
-  margin:auto;
+  margin:1rem 1rem auto;
   gap: 7px; 
   /* position: relative; */
   /* top: 100px;
@@ -250,6 +251,7 @@ const DIV = styled.div`
   @media only screen and (min-width: 280px) and (max-width: 667px) {
     display: grid;
     /* justify-content: space-between; */
+    margin: auto;
 grid-template-columns: repeat(2,1fr);
     /* flex-direction: row; */
     width: 100%;

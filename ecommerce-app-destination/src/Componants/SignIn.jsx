@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 // import './RegistrationForm.css';
 import styled from "styled-components"
 import {useNavigate,Link} from "react-router-dom"
+import { useDispatch } from 'react-redux';
+import { RgisterRequest } from '../Redux/UserReducer/Type';
 function RegistrationForm() {
   const navigate= useNavigate()
+  const dispatch=useDispatch()
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -24,8 +27,12 @@ function RegistrationForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // You can add form validation and submission logic here
-    console.log(formData);
-    navigate("/login")
+    dispatch(RgisterRequest(formData)).then(res=>{
+     localStorage.setItem("userName",JSON.stringify(res.name))
+     alert("your registation successful")
+     navigate("/login")
+    })
+    // console.log(formData);
   };
 
 

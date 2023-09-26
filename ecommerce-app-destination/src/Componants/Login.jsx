@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 // import './RegistrationForm.css';
 import styled from "styled-components"
 import {useNavigate,Link} from "react-router-dom"
+import { useDispatch } from 'react-redux';
+import { LoginRequest } from '../Redux/UserReducer/Type';
 
 function Login() {
   const navigate=useNavigate()
+  const dispatch= useDispatch()
   const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    city: '',
+
     email: '',
     password: '',
-    confirmPassword: '',
+    
   });
 
   const handleChange = (e) => {
@@ -24,9 +25,13 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can add form validation and submission logic here
-    console.log(formData);
-navigate("/product")
+    // console.log(formData);
+
+    dispatch(LoginRequest(formData)).then(res=>{
+      localStorage.setItem("token",JSON.stringify(res.data.token))
+      alert(res.data.message)
+      navigate("/product")
+    })
   };
 
 
@@ -38,32 +43,6 @@ navigate("/product")
          <div className='extra-suggesion'>
           <h1>Your cart is waiting! Log in to your account and bring your e-commerce dreams to life!</h1>
         </div>
-        {/* <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        /> */}
-      
-        {/* <input
-          type="number"
-          name="age"
-          placeholder="Age"
-          value={formData.age}
-          onChange={handleChange}
-          required
-        />
-         */}
-        {/* <input
-          type="text"
-          name="city"
-          placeholder="City"
-          value={formData.city}
-          onChange={handleChange}
-          required
-        /> */}
         <input
           type="email"
           name="email"
@@ -80,14 +59,7 @@ navigate("/product")
           onChange={handleChange}
           required
         />
-        {/* <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          required
-        /> */}
+       
         <button type="submit">LOGIN</button>
         <div className='already-account'>
         <h1>Create Account 👉<Link className="link" to="/signIn">signup here</Link></h1>

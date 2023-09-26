@@ -4,7 +4,7 @@ import { Box, Skeleton, SkeletonCircle, SkeletonText,Spinner,Stack } from '@chak
 const Loader = () => {
     // const [isLoaded, setIsLoaded] = React.useState(false)
   return (
-    <div>
+    <div style={{margin:"auto"}}>
     <Spinner
   thickness='4px'
   speed='0.65s'
