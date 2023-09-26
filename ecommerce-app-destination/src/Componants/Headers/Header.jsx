@@ -12,17 +12,19 @@ import {
 
 // import logo from "./../Images/DREAM-PARK.png"
 import Mylogo from "../../Images/dream-park.png"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { UserUrl } from "../../Url/Url";
+import { LogoutRequest } from "../../Redux/UserReducer/Type";
 
 const Header = () => {
   const navigate = useNavigate();
-  const {isAuth}= useSelector(state=>state.UserReducer)
-  // console.log({isAuth});
+  const authData= useSelector(state=>state.UserReducer)
+  // console.log({authData});
   const [SearchPrarams2,setSeachParams2]=useSearchParams();
+  const dispatch= useDispatch()
   let initialSearch= SearchPrarams2.get("q")
 const [q,setQuery] = useState(initialSearch||"")
-
-
 const handleSearch=()=>{
      let QueryParam2={}
      q&&(QueryParam2.q=q)
@@ -35,7 +37,10 @@ const {value}= e.target;
 setQuery(value)
   }
 const handleLogOut=()=>{
-
+dispatch(LogoutRequest()).then(res=>{
+ alert(res.message)
+ navigate("/")
+})
 }
 
   return (
@@ -68,9 +73,9 @@ const handleLogOut=()=>{
             <div style={{ fontSize: "20px" }}>
               <FontAwesomeIcon icon={faUser} />
             </div>
-           {isAuth?<div style={{ display: "flex", gap: "10px" }}>
+           {authData?.isAuth?<div style={{ display: "flex", gap: "10px" }}>
              
-                <p className="SignUp" > {JSON.parse(localStorage.getItem("userName"))}</p>
+                <p className="SignUp" > {authData?.name||JSON.parse(localStorage.getItem("userName"))}</p>
               <p color="gray.500" className="SignUp" onClick={handleLogOut} >
                LOGOUT
               </p>
@@ -95,8 +100,8 @@ const handleLogOut=()=>{
         <div className="second-nav-box position">
 
           <div className="second-nav-item search">
-     <img src={Mylogo} alt="logo" />
-     <p className="dream-park">DREAM PARK</p>
+     <img onClick={()=>navigate("/")}  src={Mylogo} alt="logo" />
+     <p className="dream-park"  onClick={()=>navigate("/")} >DREAM PARK</p>
           </div>
 
           <div className="cart-symbole" style={{ display: "flex", gap: "12px",justifyContent:"center"}}>

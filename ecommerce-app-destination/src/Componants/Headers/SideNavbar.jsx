@@ -219,7 +219,7 @@ useEffect(()=>{
 export default SideNavbar;
 // style={{width:"15%",height:"80vh",position:"sticky",top:"120px"}}
 const DIV = styled.div`
-  width: 15%;
+  width: 17%;
   /* height: 100vh; */
   border-right: 2px solid #120d0d;
   display: flex;

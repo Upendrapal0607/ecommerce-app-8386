@@ -17,7 +17,7 @@ const [page,setPage]= useState(1)
 const [SearchPrarams,setSeachParams]=useSearchParams();
 const [SearchPrarams2,setSeachParams2]=useSearchParams();
 // console.log({SearchPrarams});
-console.log({Products});
+// console.log({Products});
 
 useEffect(()=>{
   let paramObj = {

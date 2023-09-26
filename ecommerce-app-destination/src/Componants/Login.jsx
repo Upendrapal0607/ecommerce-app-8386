@@ -25,12 +25,12 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(formData);
-
     dispatch(LoginRequest(formData)).then(res=>{
       localStorage.setItem("token",JSON.stringify(res.data.token))
       alert(res.data.message)
-      navigate("/product")
+      if (res.data.message=="login successful") {
+        navigate("/product")
+      }
     })
   };
 

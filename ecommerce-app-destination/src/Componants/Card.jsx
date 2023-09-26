@@ -1,10 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import {useDispatch, useSelector} from "react-redux"
 const Card = ({ item, index }) => {
   const navigate = useNavigate();
-
+ const dispatch=useDispatch()
+ const data= useSelector(state=>state.CartProduct)
+ console.log({CardData:data});
   // category: "belt";
   // details: "Leather, metal,Imported.";
   // gender: "female";
@@ -22,6 +24,7 @@ const Card = ({ item, index }) => {
       image: item.image,
       price: item.price,
       rating: item.rating,
+      prodectId:item._id
     };
    
   };
