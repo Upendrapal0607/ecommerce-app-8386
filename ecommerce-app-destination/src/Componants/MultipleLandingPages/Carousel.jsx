@@ -4,7 +4,9 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Landing.css";
 import { Link } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export function Slider1() {
+  const navigate= useNavigate()
   var settings = {
     dots: true,
     infinite: true,
@@ -41,45 +43,45 @@ export function Slider1() {
   };
 
   return (
-    <div className="slider">
+    <div className="slider" id="corousel-1">
       <Slider {...settings}>
-        <div className="box">
+        <div onClick={()=>navigate("Product?category=other")} className="box">
           <img
             src="https://images.urbndata.com/is/image/Anthropologie/4130578570023_041_b2?$an-category$&qlt=80&fit=constrain"
             alt="erron"
           />
           <Link>The Summerset Maxi Dress</Link>
         </div>
-        <div className="box">
+        <div onClick={()=>navigate("Product?category=other")} className="box">
           <img
             src="https://images.urbndata.com/is/image/Anthropologie/41047333_011_b2?$an-category$&qlt=80&fit=constrain"
             alt=""
           />
           <Link>Brass & Marble Knob</Link>
         </div>
-        <div className="box">
+        <div onClick={()=>navigate("Product?category=other")} className="box">
           <img
             src="https://images.urbndata.com/is/image/Anthropologie/4120527680001_092_b?$an-category$&qlt=80&fit=constrain"
             alt=""
-          />
+           onClick={()=>navigate("Product?category=other")}/>
           <img src="" alt="" />
           <Link>Pilco Denim Skirt</Link>
         </div>
-        <div className="box">
+        <div onClick={()=>navigate("Product?category=other")} className="box">
           <img
             src="https://images.urbndata.com/is/image/Anthropologie/51917649_100_b2?$an-category$&qlt=80&fit=constrain"
             alt=""
           />
           <Link>Thia Knobs, Set of 2</Link>
         </div>
-        <div className="box">
+        <div onClick={()=>navigate("Product?category=other")} className="box">
           <img
             src="https://images.urbndata.com/is/image/Anthropologie/4112522160116_060_b2?$an-category$&qlt=80&fit=constrain"
             alt=""
           />
           <Link>Pilcro Bella Henley Top</Link>
         </div>
-        <div className="box">
+        <div onClick={()=>navigate("Product?category=other")} className="box">
           <img
             src="https://images.urbndata.com/is/image/Anthropologie/4123650590242_437_b2?$an-category$&qlt=80&fit=constrain"
             alt=""
@@ -87,14 +89,14 @@ export function Slider1() {
           <Link>The Colette Croped Wide-leg Pants</Link>
         </div>
 
-        <div className="box">
+        <div onClick={()=>navigate("Product?category=other")} className="box">
           <img
             src="https://images.urbndata.com/is/image/Anthropologie/80730104_066_b2?$an-category$&qlt=80&fit=constrain"
             alt=""
           />
           <Link>Printed Shine Tie Front Kimono</Link>
         </div>
-        <div className="box">
+        <div onClick={()=>navigate("Product?category=other")} className="box">
           <img
             src="https://images.urbndata.com/is/image/Anthropologie/4130916210153_009_b2?$an-category$&qlt=80&fit=constrain"
             alt=""
@@ -125,6 +127,7 @@ export function Slider2() {
   const [image_condition8, set_image_condtion8] = useState(true);
   const [image_condition9, set_image_condtion9] = useState(true);
   const [image_condition10, set_image_condtion10] = useState(true);
+  const navigate= useNavigate()
   var settings = {
     dots: true,
     infinite: true,
@@ -171,7 +174,7 @@ export function Slider2() {
           onMouseLeave={() => {
             set_image_condtion1(!image_condition1);
           }}
-        >
+        onClick={()=>navigate("Product?category=other")} >
           <img
             src={
               image_condition1
@@ -190,7 +193,7 @@ export function Slider2() {
           onMouseLeave={() => {
             set_image_condtion2(!image_condition2);
           }}
-        >
+        onClick={()=>navigate("Product?category=other")} >
           <img
             src={
               image_condition2
@@ -209,7 +212,7 @@ export function Slider2() {
           onMouseLeave={() => {
             set_image_condtion3(!image_condition3);
           }}
-        >
+        onClick={()=>navigate("Product?category=other")} >
           <img
             src={
               image_condition3
@@ -217,7 +220,7 @@ export function Slider2() {
                 : "https://images.urbndata.com/is/image/Anthropologie/4139952400016_010_b2?$an-category$&qlt=80&fit=constrain"
             }
             alt=""
-          />
+           onClick={()=>navigate("Product?category=other")}/>
           <img src="" alt="" />
           <Link>Lifarmation Abigail Linen Top</Link>
         </div>
@@ -229,7 +232,7 @@ export function Slider2() {
           onMouseLeave={() => {
             set_image_condtion4(!image_condition4);
           }}
-        >
+        onClick={()=>navigate("Product?category=other")} >
           <img
             src={
               image_condition4
@@ -248,7 +251,7 @@ export function Slider2() {
           onMouseLeave={() => {
             set_image_condtion5(!image_condition5);
           }}
-        >
+        onClick={()=>navigate("Product?category=other")} >
           <img
             src={
               image_condition5
@@ -267,7 +270,7 @@ export function Slider2() {
           onMouseLeave={() => {
             set_image_condtio6(!image_condition6);
           }}
-        >
+        onClick={()=>navigate("Product?category=other")} >
           <img
             src={
               image_condition6
@@ -287,7 +290,7 @@ export function Slider2() {
           onMouseLeave={() => {
             set_image_condtion7(!image_condition7);
           }}
-        >
+        onClick={()=>navigate("Product?category=other")} >
           <img
             src={
               image_condition7
@@ -306,7 +309,7 @@ export function Slider2() {
           onMouseLeave={() => {
             set_image_condtion8(!image_condition8);
           }}
-        >
+        onClick={()=>navigate("Product?category=other")} >
           <img
             src={
               image_condition8
@@ -317,7 +320,7 @@ export function Slider2() {
           />
           <Link>Capri Blue Volcano Matte Black Jar</Link>
         </div>
-        {/* <div className="box"  onMouseEnter={()=>{set_image_condtion9(!image_condition9)}} onMouseLeave={()=>{set_image_condtion9(!image_condition9)}}>
+        {/* <div onClick={()=>navigate("Product?category=other")} className="box"  onMouseEnter={()=>{set_image_condtion9(!image_condition9)}} onMouseLeave={()=>{set_image_condtion9(!image_condition9)}}>
               <img src="https://images.ctfassets.net/5de70he6op10/1wvoOBYHC9zcXpOFI0rASL/c19a5326e17d028f98f7e694fe9442bb/484733230-ls_customerfave_b.jpg?w=630&q=80&fm=webp" alt="" />
               <Link>Capri Blue Pink Shimmar Jar</Link>
             </div> */}
@@ -329,7 +332,7 @@ export function Slider2() {
           onMouseLeave={() => {
             set_image_condtion10(!image_condition10);
           }}
-        >
+        onClick={()=>navigate("Product?category=other")} >
           <img
             src="https://images.urbndata.com/is/image/Anthropologie/4130916210153_009_b2?$an-category$&qlt=80&fit=constrain"
             alt=""

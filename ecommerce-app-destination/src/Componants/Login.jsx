@@ -1,19 +1,32 @@
 import React, { useState } from 'react';
 // import './RegistrationForm.css';
 import styled from "styled-components"
-import {useNavigate,Link} from "react-router-dom"
-import { useDispatch } from 'react-redux';
+import {useNavigate,Link, useLocation} from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../Redux/UserReducer/Type';
-
+import { getAllCartProduct } from '../Redux/CartProductReducer/Type';
+import Cookies from "js-cookie";
+import { useToast } from '@chakra-ui/react';
 function Login() {
-  const navigate=useNavigate()
-  const dispatch= useDispatch()
+  // const navigate=useNavigate()
+  // const dispatch= useDispatch()
   const [formData, setFormData] = useState({
 
     email: '',
     password: '',
     
   });
+  const [show, setShow] = useState(false);
+  // const [formdata, setFormdata] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+  const toast = useToast();
+  const token = Cookies.get("login_token");
+  const name = Cookies.get("login_name");
+  // console.log({Cookies,token,name})
+  const dispatch = useDispatch();
+  // const loading = useSelector((store) => store.authReducer.loading);
+  const location = useLocation();
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,17 +36,79 @@ function Login() {
     });
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   dispatch(LoginRequest(formData)).then(res=>{
+  //     localStorage.setItem("token",JSON.stringify(res.data.token))
+  //     alert(res.data.message)
+  //     if (res.data.message=="login successful") {
+  //       navigate("/product")
+  //       dispatch(getAllCartProduct())
+  //     }
+  //   })
+  // };
   const handleSubmit = (e) => {
+   
     e.preventDefault();
-    dispatch(LoginRequest(formData)).then(res=>{
-      localStorage.setItem("token",JSON.stringify(res.data.token))
-      alert(res.data.message)
-      if (res.data.message=="login successful") {
-        navigate("/product")
-      }
-    })
-  };
+    // console.log(formdata,"Form data")
+    dispatch(LoginRequest(formData)).then((res)=>{
+      console.log(res.data,"data")
 
+      if(res.data.message==="login successful"){
+          // console.log(res);
+          setFormData({email:"",password:""})
+          Cookies.set("login_token",`${res.data.token}`,{expires:7})
+          Cookies.set("login_name",`${res.data.user.name}`,{expires:7})
+          Cookies.set("login_email",`${res.data.user.email}`,{expires:7})
+          res.data.login_role==="admin"?Cookies.set("login_role","admin",{expires:7}):Cookies.set("login_role","user",{expires:7});
+          toast({
+              title: `Welcome ${res.data.user.name}`,
+              position: "bottom",
+              status: 'success',
+              duration: 2000,
+              isClosable: true,
+          })
+          
+          window.location.reload()
+          navigate("/product")
+          // dispatch(getAllCartProduct())
+      }else if(res.data.message==="wrong password or email"){
+          toast({
+              title: `wrong password`,
+              position: "bottom",
+              status: 'error',
+              duration: 3000,
+              isClosable: true,
+          })
+      }else if(res.data.message==="please provid email and password"){
+          toast({
+              title: `${res.data.message}`,
+              position: "bottom",
+              status: 'error',
+              duration: 3000,
+              isClosable: true,
+          })
+      }else{
+          toast({
+              title: `Something Went Wrong, Try again!!`,
+              status: 'error',
+              position: "bottom",
+              duration: 3000,
+              isClosable: true,
+          })
+      }
+      
+  }).catch((err)=>{
+     
+      toast({
+          title: `Something Went Wrong, Try again!!`,
+          status: 'error',
+          position: "bottom",
+          duration: 3000,
+          isClosable: true,
+        })
+  })
+  };
 
   return (
     <DIV>
@@ -60,7 +135,7 @@ function Login() {
           required
         />
        
-        <button type="submit">LOGIN</button>
+        <button type="submit">USER LOGIN</button>
         <div className='already-account'>
         <h1>Create Account 👉<Link className="link" to="/signIn">signup here</Link></h1>
       </div>

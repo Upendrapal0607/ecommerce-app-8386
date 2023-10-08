@@ -13,7 +13,7 @@ const AdminProductPage = () => {
   const dispatch=useDispatch()
   const [isUpdate,setIsUpdate]=useState(false)
   const data= useSelector(state=>state.ProductReducer)
-  console.log(data);
+  // console.log(data);
   const [DataId,setDataId]=useState(0)
 
 const [page,setPage]=React.useState(1)
@@ -85,7 +85,14 @@ dispatch(updateProduct(DataId,PostData))
 
   return (
     <DIV>
-      {data?.isError?< ErrorLoad/>:<div className='main-box'>
+  
+      {data?.isError?< ErrorLoad/>:
+      <div>
+         <div className="add-buttom">
+          <button onClick={()=>setIsUpdate(false)}>ADD</button>
+         </div>
+      
+      <div className='main-box'>
      {isUpdate?<UpdateData id={DataId} setIsUpdate={setIsUpdate} handleUpdata={handleUpdata} />:<AdminForm handleAdd={handleAdd}/>}
       <div className='product-page'>
       {data?.isLoading? <Loader />:<AdminProductList data={data.Product.data} handleEdit={handleEdit} HandleDelete={HandleDelete}/>}
@@ -95,6 +102,7 @@ dispatch(updateProduct(DataId,PostData))
        <button disabled={page==data.Product.totalPages} onClick={()=>setPage(page+1)} className="page-btn">{">"}</button>
       </div>
       </div>
+    </div>
     </div>}
     </DIV>
   )
@@ -106,6 +114,27 @@ const DIV= styled.div`
   justify-content: space-between;
   border: 0px solid blue;
   gap: 1rem; */
+  .add-buttom{
+    display:flex;
+    justify-content: end;
+    /* text-align: left; */
+    width:98%;
+    border: 0px solid red;
+    margin:auto;
+  }
+  .add-buttom>button{
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
   .main-box{
 width:100%;
 display:flex;
@@ -116,7 +145,7 @@ display:flex;
   .product-page{
     border: 0px solid blue;
     width: 65%;
-    padding:1rem 0rem;
+    /* padding:1rem 0rem; */
 /* overscroll-behavior-y: -2; */
 /* width: 30%; */
 margin:2rem auto;

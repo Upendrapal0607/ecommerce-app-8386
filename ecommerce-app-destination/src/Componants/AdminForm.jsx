@@ -48,8 +48,19 @@ function AdminForm({handleAdd}) {
           onChange={handleChange}
           required
         />
-      
-        <input
+      <select name="category"  value={formData.category} onChange={handleChange} id="" placeholder='Select Category'  required>
+          <option value="">Select Category</option>
+          <option value="cloth">Cloth</option>
+          <option value="dress-cloth">Dress Related Cloth</option>
+          <option value="wedding-cloth">Wedding Cloth</option>
+          <option value="grocery">Grocery Product</option>
+          <option value="shoes">Shoes</option>
+          <option value="gift">Gift</option>
+          <option value="jewelary">Jewelary</option>
+          <option value="belt">Belt</option>
+          <option value="other">Other</option>
+        </select>
+        {/* <input
           type="text"
           name="category"
           placeholder="Category"
@@ -57,7 +68,7 @@ function AdminForm({handleAdd}) {
           onChange={handleChange}
           required
         />
-        
+         */}
         <input
           type="text"
           name="image"
@@ -122,7 +133,7 @@ export default AdminForm;
 const DIV=styled.div`
 border: 0px solid red;
 /* height: 60vh; */
-padding:2rem 0rem;
+/* padding:2rem 0rem; */
 /* overscroll-behavior-y: -2; */
 width: 30%;
 margin:2rem auto;

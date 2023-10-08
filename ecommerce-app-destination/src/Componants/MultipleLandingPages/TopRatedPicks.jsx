@@ -3,7 +3,7 @@ import "./Landing.css";
 import { Link } from "react-router-dom";
 export function TopRatedPicks() {
   return (
-    <div>
+    <div id="top-rated">
       <div className="top-rated-picked">
         {Product.Top_rated_picked?.map((item) => {
           return (
@@ -17,7 +17,7 @@ export function TopRatedPicks() {
                 <p>{item.star}</p>
                 <p>{item.details}</p>
                 <div>
-                  <Link to="/" style={{ color: "blue" }}>
+                  <Link to={item?.id==3?"/Product?category=shoes":"/Product?category=cloth"} style={{ color: "blue" }}>
                     Shop Now
                   </Link>
                 </div>

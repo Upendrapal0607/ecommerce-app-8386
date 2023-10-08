@@ -24,7 +24,7 @@ export function MoretoExplore() {
                 <p>{item.star}</p>
                 <p>{item.details}</p>
                 <div>
-                  <Link to="/" style={{ color: "blue" }}>
+                  <Link to={item.id==2?"/Product?category=other":"/Product?category=cloth"} style={{ color: "blue" }}>
                     Shop Now
                   </Link>
                 </div>

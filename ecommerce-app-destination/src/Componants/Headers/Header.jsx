@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
-import { Box, Input, InputGroup, InputRightAddon } from "@chakra-ui/react";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { Box, Input, InputGroup, InputRightAddon, useToast } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -10,38 +10,85 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
-// import logo from "./../Images/DREAM-PARK.png"
 import Mylogo from "../../Images/dream-park.png"
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { UserUrl } from "../../Url/Url";
+import Cookies from 'js-cookie';
 import { LogoutRequest } from "../../Redux/UserReducer/Type";
+import { UpdateCartEmpty } from "../../Redux/CartProductReducer/Type";
 
 const Header = () => {
   const navigate = useNavigate();
-  const authData= useSelector(state=>state.UserReducer)
-  // console.log({authData});
-  const [SearchPrarams2,setSeachParams2]=useSearchParams();
-  const dispatch= useDispatch()
-  let initialSearch= SearchPrarams2.get("q")
-const [q,setQuery] = useState(initialSearch||"")
-const handleSearch=()=>{
-     let QueryParam2={}
-     q&&(QueryParam2.q=q)
-     setSeachParams2(QueryParam2)
-}
+  const authData = useSelector(state => state.UserReducer)
+  const { data } = useSelector(state => state.CartProduct)
+  console.log({HeaderData:data})
+  // const token = Cookies.get("login_token");
+  const token = Cookies.get("login_token");
+  const name = Cookies.get("login_name");
+  const Admin_name = Cookies.get("login_name");
+  const admin = Cookies.get("login_role");
   
+  const toast = useToast();
+  const dispatch = useDispatch();
+  // console.log({ authData });
+  // const dispatch = useDispatch()
+  const [SearchPrarams2, setSeachParams2] = useSearchParams();
+  let initialSearch = SearchPrarams2.get("q")
+  const [q, setQuery] = useState(initialSearch || "")
+  const handleSearch = () => {
+    let QueryParam2 = {}
+    q && (QueryParam2.q = q)
+    setSeachParams2(QueryParam2)
 
-const handleSearchParams= (e)=>{
-const {value}= e.target;
-setQuery(value)
   }
-const handleLogOut=()=>{
-dispatch(LogoutRequest()).then(res=>{
- alert(res.message)
- navigate("/")
-})
-}
+
+
+  const handleSearchParams = (e) => {
+    const { value } = e.target;
+    setQuery(value)
+  }
+  const handleLogOut = () => {
+ 
+     dispatch(LogoutRequest()).then(res => {
+      if(res.message==="loguot successful"){
+        toast({
+            title: `Logged Out Successfully!!`,
+            position: "bottom",
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+        })
+        Cookies.remove("login_token")
+        Cookies.remove("login_email")
+        Cookies.remove("login_name")
+        Cookies.remove("login_role")
+        // Cookies.remove("login_avatar");
+        // window.location.reload();
+        dispatch(UpdateCartEmpty())
+        navigate("/")
+    }else{
+      toast({
+        title: `Something Went Wrong, Try again!!`,
+        position: "bottom",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+    })
+    }
+    
+    })
+          
+       .catch((err)=>{
+
+            toast({
+                title: `Something Went Wrong, Try again!!`,
+                position: "bottom",
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            })
+        })
+      
+  }
 
   return (
     <DIV>
@@ -73,20 +120,20 @@ dispatch(LogoutRequest()).then(res=>{
             <div style={{ fontSize: "20px" }}>
               <FontAwesomeIcon icon={faUser} />
             </div>
-           {authData?.isAuth?<div style={{ display: "flex", gap: "10px" }}>
-             
-                <p className="SignUp" > {authData?.name||JSON.parse(localStorage.getItem("userName"))}</p>
+            {token? <div style={{ display: "flex", gap: "10px" }}>
+
+              <p className="SignUp" > {admin=="user"?name:Admin_name}</p>
               <p color="gray.500" className="SignUp" onClick={handleLogOut} >
-               LOGOUT
+                LOGOUT
               </p>
-            </div>:<div style={{ display: "flex", gap: "10px" }}>
-             
-             <p className="SignUp" onClick={()=>navigate("/signIn")} >New Register</p>
-       
-           <p color="gray.500" className="SignUp" onClick={()=>navigate("/login-path")} >
-             Log In
-           </p>
-         </div>}
+            </div> : <div style={{ display: "flex", gap: "10px" }}>
+
+              <p className="SignUp" onClick={() => navigate("/signIn")} >New Register</p>
+
+              <p color="gray.500" className="SignUp" onClick={() => navigate("/login-path")} >
+                Log In
+              </p>
+            </div>}
           </div>
         </div>
       </div>
@@ -100,13 +147,13 @@ dispatch(LogoutRequest()).then(res=>{
         <div className="second-nav-box position">
 
           <div className="second-nav-item search">
-     <img onClick={()=>navigate("/")}  src={Mylogo} alt="logo" />
-     <p className="dream-park"  onClick={()=>navigate("/")} >DREAM PARK</p>
+            <img onClick={() => navigate("/")} src={Mylogo} alt="logo" />
+            <p className="dream-park" onClick={() => navigate("/")} >DREAM PARK</p>
           </div>
 
-          <div className="cart-symbole" style={{ display: "flex", gap: "12px",justifyContent:"center"}}>
+          <div className="cart-symbole" style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
             <InputGroup size="sm" alignItems="center">
-              <Input className="search-input" value={q} onChange={handleSearchParams} placeholder="Search your product" pt={4} pb={4}/>
+              <Input className="search-input" value={q} onChange={handleSearchParams} placeholder="Search your product" pt={4} pb={4} />
               <InputRightAddon onClick={handleSearch}
                 padding={4}
                 fontSize={20}
@@ -115,11 +162,13 @@ dispatch(LogoutRequest()).then(res=>{
               />
             </InputGroup>
             <Box
+
               onClick={() => navigate("/cart")}
               className="cart-icon"
               p={6}
               fontSize={25}
             >
+              <h1 style={{ fontWeight: "600", fontSize: "25px", zIndex: "2", marginBottom: "-17px", marginTop: "0px", marginLeft: "20px", color: "red" }}>{data?.length == 0 ? "" : data?.length}</h1>
               <FontAwesomeIcon icon={faCartShopping} />
             </Box>
           </div>
@@ -133,31 +182,49 @@ dispatch(LogoutRequest()).then(res=>{
           className="third-nav"
           style={{ display: "flex", flexWrap: "wrap" }}
         >
-          <Box className="third-nav-box" onClick={() => navigate("/")}>
+          <Link to="Product" className="third-nav-box" smooth={true}
+            offset={-100}
+            duration={500}>
             New!
-          </Box>
-          <Box className="third-nav-box" onClick={() => navigate("/")}>
+          </Link>
+          <Link to="Product?sortBy=desc" className="third-nav-box" smooth={true}
+            offset={-100}
+            duration={500}>
             Top-Rared
-          </Box>
-          <Box className="third-nav-box" onClick={() => navigate("/")}>
+          </Link>
+          <Link to="Product?category=dress-cloth" className="third-nav-box" smooth={true}
+            offset={-100}
+            duration={500}>
             Dresses
-          </Box>
-          <Box className="third-nav-box" onClick={() => navigate("/")}>
+          </Link>
+          <Link className="third-nav-box" to="Product?category=cloth" smooth={true}
+            offset={-100}
+            duration={500}>
             Clothing
-          </Box>
-          <Box className="third-nav-box" onClick={() => navigate("/")}>
+          </Link>
+          <Link className="third-nav-box" to="Product?category=wedding-cloth" smooth={true}
+            offset={-100}
+            duration={500}>
             Wedding
-          </Box>
-          <Box className="third-nav-box">Home & Furniture</Box>
-          <Box className="third-nav-box" onClick={() => navigate("/")}>
+          </Link>
+          <Link to="Product?category=grocery" className="third-nav-box" smooth={true}
+            offset={-100}
+            duration={500}>Home & Furniture</Link>
+          <Link className="third-nav-box" to="Product?category=shoes" smooth={true}
+            offset={-100}
+            duration={500}>
             Shoese
-          </Box>
-          <Box className="third-nav-box" onClick={() => navigate("/")}>
+          </Link>
+          <Link className="third-nav-box" to="Product?category=gift" smooth={true}
+            offset={-100}
+            duration={500}>
             Gift
-          </Box>
-          <Box className="third-nav-box" onClick={() => navigate("/")}>
-            Sale
-          </Box>
+          </Link>
+          <Link className="third-nav-box" to="Product?category=other" smooth={true}
+            offset={-100}
+            duration={500}>
+            Other
+          </Link>
         </div>
       </div>
     </DIV>

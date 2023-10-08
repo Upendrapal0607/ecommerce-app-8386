@@ -130,11 +130,15 @@ useEffect(()=>{
      <div>
       <h3 className="Filter-type">Filter By Category</h3>
       <Select onChange={handleCategoryFilter} name="category" placeholder='Select Category'>
-  <option value='belt'>Belt</option>
-  <option value='cloth'>Cloth</option>
-  {/* <option value='jewelary'></option> */}
-  <option value='shoes'>Shoes</option>
-  <option value='jewelary'>Jewelary</option>
+      <option value="cloth">Cloth</option>
+          <option value="dress-cloth">Dress Related Cloth</option>
+          <option value="wedding-cloth">Wedding Cloth</option>
+          <option value="grocery">Grocery Product</option>
+          <option value="shoes">Shoes</option>
+          <option value="gift">Gift</option>
+          <option value="belt">Belt</option>
+          <option value="jewelary">Jewelary</option>
+          <option value="other">Other</option>
 </Select>
       </div>
       {/* <div>

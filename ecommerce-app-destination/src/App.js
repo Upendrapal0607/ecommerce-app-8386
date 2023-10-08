@@ -4,6 +4,7 @@ import Header from './Componants/Headers/Header';
 // import Footer from './Componants/Footer/Footer';
 import MainRoute from './Pages/MainRoute';
 import { Footer } from './Componants/Footer/Footer';
+import BackToTop from './Componants/BacktTop';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header/>
       <MainRoute/>
       <Footer/>
+      <BackToTop/>
     </div>
   );
 }

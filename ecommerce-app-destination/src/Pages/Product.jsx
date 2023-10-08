@@ -8,6 +8,7 @@ import { getAllProduct } from '../Redux/UserProductReducer/Action'
 import ErrorLoad from '../Componants/ErrorLoad'
 import Loader from '../Componants/Loader'
 import ProductNotFound from '../Componants/ProductNotFound'
+import { getAllCartProduct } from '../Redux/CartProductReducer/Type'
 
 const Product = () => {
 const dispatch= useDispatch()
@@ -16,9 +17,10 @@ const location = useLocation()
 const [page,setPage]= useState(1)
 const [SearchPrarams,setSeachParams]=useSearchParams();
 const [SearchPrarams2,setSeachParams2]=useSearchParams();
-// console.log({SearchPrarams});
-// console.log({Products});
 
+useEffect(()=>{
+     dispatch(getAllCartProduct())
+},[])
 useEffect(()=>{
   let paramObj = {
     params: {
@@ -32,9 +34,9 @@ useEffect(()=>{
       q:SearchPrarams2.get("q")
     },
   };
-  console.log({paramObj});
+  
 dispatch(getAllProduct(paramObj)).then(res=>{
-  // console.log({res});
+  
 })
 },[page,location])
 

@@ -4,16 +4,19 @@ import styled from "styled-components"
 import {useNavigate,Link} from "react-router-dom"
 import { useDispatch } from 'react-redux';
 import { RgisterRequest } from '../Redux/UserReducer/Type';
+import { useToast } from '@chakra-ui/react';
 function RegistrationForm() {
   const navigate= useNavigate()
   const dispatch=useDispatch()
+  const [pass,setPass]=useState("")
+  const toast=useToast()
   const [formData, setFormData] = useState({
     name: '',
     age: '',
     city: '',
     email: '',
     password: '',
-    confirmPassword: '',
+
   });
 
   const handleChange = (e) => {
@@ -26,12 +29,32 @@ function RegistrationForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can add form validation and submission logic here
-    dispatch(RgisterRequest(formData)).then(res=>{
-     localStorage.setItem("userName",JSON.stringify(res.name))
-     alert("your registation successful")
-     navigate("/login")
+    if(pass!=formData.password){
+      toast({
+        title: `wrong password`,
+        position: "bottom",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
     })
+    }else{
+      dispatch(RgisterRequest(formData)).then(res=>{
+        console.log({res})
+        
+        toast({
+          title: `${res.message}`,
+          position: "bottom",
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+      })
+      setTimeout(()=>{
+        navigate("/login")
+      },3000)
+       })
+    }
+    // You can add form validation and submission logic here
+   
     // console.log(formData);
   };
 
@@ -80,17 +103,17 @@ function RegistrationForm() {
         />
         <input
           type="password"
-          name="password"
+    
           placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
+          value={pass}
+          onChange={e=>setPass(e.target.value)}
           required
         />
         <input
           type="password"
-          name="confirmPassword"
+          name="password"
           placeholder="Confirm Password"
-          value={formData.confirmPassword}
+          value={formData.password}
           onChange={handleChange}
           required
         />

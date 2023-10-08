@@ -53,7 +53,8 @@ gap: .5rem;
 padding:0rem 0rem;
 /* overscroll-behavior-y: -2; */
 /* width: 40%; */
-margin:2rem auto;
+/* margin:2rem auto; */
+margin-bottom: 2rem;
 color: #000000d6;
 .table-formate{
 border: 0px solid green;
@@ -83,6 +84,8 @@ align-items: center;
   align-items: center;
   border:2px solid #0000007d;
   display: flex;
+  /* padding-left: 5px; */
+  padding-right: 6px;
 }
 
 
@@ -100,6 +103,7 @@ align-items: center;
 .edit-delete-btn{
   display: flex;
   gap:.2rem;
+  /* margin-left: 4px; */
   align-items: center;
   justify-content: center;
 }

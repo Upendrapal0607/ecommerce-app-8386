@@ -4,16 +4,17 @@ import styled from "styled-components"
 import { useNavigate,Link } from 'react-router-dom';
 import axios from 'axios';
 import { AdminUrl } from '../Url/Url';
-
+import Cookies from 'js-cookie';
+import { useToast } from '@chakra-ui/react';
 const initialData={
   email: '',
   password: '',
  
 }
 function AdminLogin() {
+  const toast=useToast()
     const navigate=useNavigate()
   const [formData, setFormData] = useState(initialData);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -28,14 +29,34 @@ function AdminLogin() {
     axios.post(`${AdminUrl}/login`,formData).then(res=>{
       console.log(res.data);
       if(res.data.message=="login successful"){
-        alert(res.data.message)
-        localStorage.setItem("token",JSON.stringify(res.data.token))
-        navigate("/productmodify")
+        console.log("hello admin")
+        Cookies.set("login_token",`${res.data.token}`,{expires:7})
+          Cookies.set("login_name",`${res.data.Admin.name}`,{expires:7})
+          Cookies.set("login_email",`${res.data.Admin.email}`,{expires:7})
+          res.data.login_role==="admin"?Cookies.set("login_role","admin",{expires:7}):Cookies.set("login_role","user",{expires:7});
+          toast({
+            title: `${res.data.message}`,
+            position: "bottom",
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+        })
+          
+          navigate("/productmodify")
       }else{
-        alert(res.data.message)
+        // alert(res.data.message)
+        toast({
+          title: `${res.data.message}`,
+          position: "bottom",
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+      })
       }
 
       setFormData(initialData)
+    }).catch(err=>{
+
     })
     // console.log(formData);
   };
@@ -99,7 +120,7 @@ function AdminLogin() {
           onChange={handleChange}
           required
         /> */}
-        <button type="submit">LOGIN</button>
+        <button type="submit">ADMIN LOGIN</button>
         <div className='already-account'>
         <h1>Create Account 👉<Link className="link" to="/adminregister">signup here</Link></h1>
       </div>

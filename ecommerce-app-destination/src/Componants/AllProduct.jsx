@@ -5,6 +5,7 @@ import Card from './Card'
 // import { Card, CardHeader, CardBody, CardFooter, VStack,HStack, Image,Text,Heading,Button } from '@chakra-ui/react'
 
 const AllProduct = ({data}) => {
+  // console.log({data});
   return (
     <DIV>
     <div className="every-card-box">

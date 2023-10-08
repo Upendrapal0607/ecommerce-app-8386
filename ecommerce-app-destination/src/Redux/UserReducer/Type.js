@@ -7,7 +7,7 @@ export const LoginRequest= payload=> async dispatch=>{
      try {
         dispatch({type:LOGIN_REQUEST})
       return await axios.post(`${UserUrl}/login`,payload).then(res=>{
-    console.log({res});
+   
     dispatch({type:LOGIN_REQUEST_SUCCESS,payload:res.data})
     return res
        }).catch(error=>{
@@ -28,6 +28,7 @@ export const RgisterRequest= payload=> async dispatch=>{
 
 dispatch({type:REGISTER_REQUEST_SUCCESS,payload:res})
 return res.data
+console.log({Register:res.data});
    }).catch(error=>{
 
        dispatch({type:LOGIN_REQUEST_FAIL})

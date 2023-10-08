@@ -1,93 +1,120 @@
 import React, { useEffect, useState } from 'react';
 // import './RegistrationForm.css';
 import styled from "styled-components"
-import {useNavigate,Link} from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
-function UpdateData({id,handleUpdata}) {
-    const navigate= useNavigate()
-    const Data= useSelector(state=>state.ProductReducer.Product.data)
-    let EditebleData= Data?.filter(el=>el._id==id)
-  const [formData, setFormData] = useState(EditebleData&&EditebleData[0]||{});
+function UpdateData({ id, handleUpdata }) {
+  // console.log({id})
+  const navigate = useNavigate()
+  const Data = useSelector(state => state.ProductReducer.Product.data)
+  const [formData, setFormData] = useState({});
+  useEffect(() => {
+    // EditebleData&&EditebleData[0]||
+    let EditebleData = Data?.filter(el => el._id == id)
+    EditebleData && setFormData(EditebleData[0])
+  }, [id])
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: (name=="price"||name=="rating")?+value:value,
+      [name]: (name == "price" || name == "rating") ? +value : value,
     });
   };
 
   return (
     <DIV>
-    <div className="registration-container">
-   
-      <form className="registration-form" onSubmit={(e)=>handleUpdata(e,formData)}>
-         {/* <div className='extra-suggesion'>
+      <div className="registration-container">
+
+        <form className="registration-form" onSubmit={(e) => handleUpdata(e, formData)}>
+          {/* <div className='extra-suggesion'>
           <h1>Empower your e-commerce journey as an admin. Register today and take charge of your online store.</h1>
         </div> */}
-        <input
-          type="text"
-          name="name"
-          placeholder="Title"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      
-        <input
+          <input
+            type="text"
+            name="name"
+            placeholder="Title"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <select name="category" value={formData.category} onChange={handleChange} id="" placeholder='Select Category' required>
+            <option value={formData.category}>{formData.category}</option>
+            <option value="cloth">Cloth</option>
+            <option value="dress-cloth">Dress Related Cloth</option>
+            <option value="wedding-cloth">Wedding Cloth</option>
+            <option value="grocery">Grocery Product</option>
+            <option value="shoes">Shoes</option>
+            <option value="gift">Gift</option>
+            <option value="jewelary">Jewelary</option>
+            <option value="belt">Belt</option>
+            <option value="other">Other</option>
+          </select>
+
+          {/* <input
           type="text"
           name="category"
           placeholder="Category"
           value={formData.category}
           onChange={handleChange}
           required
-        />
-        
-        <input
-          type="text"
-          name="image"
-          placeholder="Image URL"
-          value={formData.image}
-          onChange={handleChange}
-          required
-        />
-        <input
+        /> */}
+
+          <input
+            type="text"
+            name="image"
+            placeholder="Image URL"
+            value={formData.image}
+            onChange={handleChange}
+            required
+          />
+          <select name="rating" value={formData.rating} onChange={handleChange} id="" placeholder='Select Rating'>
+            <option value={formData.rating}>{formData.rating}</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+          {/* <input
           type="number"
           name="rating"
           placeholder="Rating"
           value={formData.rating}
           onChange={handleChange}
           required
-        />
-        <input
-          type="number"
-          name="price"
-          placeholder="Price"
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
-        <select name="gender" onChange={handleChange} value={formData.gender} id="" placeholder='Select Gender'>
-          <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="kids">Kids</option>
-        </select>
-        <textarea
-          type="text"
-          name="details"
-          placeholder="Description"
-          value={formData.details}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">UPDATE</button>
-        {/* <div className='already-account'>
+        /> */}
+          <input
+            type="number"
+            name="price"
+            placeholder="Price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+          <select name="gender" onChange={handleChange} value={formData.gender} id="" placeholder='Select Gender'>
+            <option value={formData.gender}>{formData.gender}</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="kids">Kids</option>
+          </select>
+          <textarea
+            type="text"
+            name="details"
+            placeholder="Description"
+            value={formData.details}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">UPDATE</button>
+          {/* <div className='already-account'>
         <h1>Already Account 👉<Link className="link" to="/adminlogin">Login here</Link></h1>
       </div> */}
-      </form>
-      
-    </div>
+        </form>
+
+      </div>
     </DIV>
   );
 }
@@ -95,10 +122,10 @@ function UpdateData({id,handleUpdata}) {
 export default UpdateData;
 
 
-const DIV=styled.div`
+const DIV = styled.div`
 border: 0px solid red;
 /* height: 60vh; */
-padding:2rem 0rem;
+/* padding:2rem 0rem; */
 /* overscroll-behavior-y: -2; */
 width: 30%;
 margin:2rem auto;
