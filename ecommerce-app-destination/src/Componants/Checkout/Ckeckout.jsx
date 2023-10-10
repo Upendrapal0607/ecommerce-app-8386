@@ -73,7 +73,7 @@ const Ckeckout = () => {
 
         <div className={Style.t_and_c}>
           {/* <h1>Hello,</h1> */}
-          <p className={Style.tagline}>Come together to collectively global development and equality for all through charitable contributions</p>
+          <p className={Style.tagline}>Shop at the Speed of Clicks!. Your Style, Your Store and Your Website. Because Style Never Sleeps.</p>
 
         </div>
         <div className={Style.Cancellation}>
