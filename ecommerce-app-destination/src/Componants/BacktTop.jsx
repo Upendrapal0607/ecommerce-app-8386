@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-// import { ArrowUpIcon } from "@chakra-ui/icons";
+
 import { Box, Button, Text } from "@chakra-ui/react";
-// import styles from "./Home.module.css";
+
 
 export default function BackToTop() {
     const [isVisible, setIsVisible] = useState(false);

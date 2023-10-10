@@ -20,13 +20,13 @@ const Header = () => {
   const navigate = useNavigate();
   const authData = useSelector(state => state.UserReducer)
   const { data } = useSelector(state => state.CartProduct)
-  console.log({HeaderData:data})
+  console.log({ HeaderData: data })
   // const token = Cookies.get("login_token");
   const token = Cookies.get("login_token");
   const name = Cookies.get("login_name");
   const Admin_name = Cookies.get("login_name");
   const admin = Cookies.get("login_role");
-  
+
   const toast = useToast();
   const dispatch = useDispatch();
   // console.log({ authData });
@@ -47,15 +47,15 @@ const Header = () => {
     setQuery(value)
   }
   const handleLogOut = () => {
- 
-     dispatch(LogoutRequest()).then(res => {
-      if(res.message==="loguot successful"){
+
+    dispatch(LogoutRequest()).then(res => {
+      if (res.message === "loguot successful") {
         toast({
-            title: `Logged Out Successfully!!`,
-            position: "bottom",
-            status: 'success',
-            duration: 2000,
-            isClosable: true,
+          title: `Logged Out Successfully!!`,
+          position: "bottom",
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
         })
         Cookies.remove("login_token")
         Cookies.remove("login_email")
@@ -65,29 +65,29 @@ const Header = () => {
         // window.location.reload();
         dispatch(UpdateCartEmpty())
         navigate("/")
-    }else{
-      toast({
-        title: `Something Went Wrong, Try again!!`,
-        position: "bottom",
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-    })
-    }
-    
-    })
-          
-       .catch((err)=>{
-
-            toast({
-                title: `Something Went Wrong, Try again!!`,
-                position: "bottom",
-                status: 'error',
-                duration: 3000,
-                isClosable: true,
-            })
+      } else {
+        toast({
+          title: `Something Went Wrong, Try again!!`,
+          position: "bottom",
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
         })
-      
+      }
+
+    })
+
+      .catch((err) => {
+
+        toast({
+          title: `Something Went Wrong, Try again!!`,
+          position: "bottom",
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+      })
+
   }
 
   return (
@@ -106,7 +106,6 @@ const Header = () => {
               }}
             >
               <option>English($)</option>
-              {/* <option>Hindi(H)</option> */}
               <option>French(F)</option>
               <option>Arabic(A)</option>
               <option>Russian(R)</option>
@@ -120,9 +119,9 @@ const Header = () => {
             <div style={{ fontSize: "20px" }}>
               <FontAwesomeIcon icon={faUser} />
             </div>
-            {token? <div style={{ display: "flex", gap: "10px" }}>
+            {token ? <div style={{ display: "flex", gap: "10px" }}>
 
-              <p className="SignUp" > {admin=="user"?name:Admin_name}</p>
+              <p className="SignUp" > {admin == "user" ? name : Admin_name}</p>
               <p color="gray.500" className="SignUp" onClick={handleLogOut} >
                 LOGOUT
               </p>
@@ -243,8 +242,7 @@ const DIV = styled.div`
 
   .SignUp:hover {
     cursor: pointer;
-   /* background-color: #1ebd26;
-   border: 2px solid #0edf29; */
+  
   
     border: 1px solid #78909C;
     background-color: white;
@@ -270,22 +268,20 @@ const DIV = styled.div`
     
   }
   .dream-park{
-    /* visibility: hidden; */
     font-size:18px;
     font-weight: 500;
-/* border:2px solid green; */
+
 padding:.5rem;
 cursor: pointer;
 border-radius: .8rem;
 background-color: #000000a6;
 color:#ffffffb5;
-/* line-height: 2rem; */
 letter-spacing: .5rem;
 box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   }
   .nav-top-box-1 {
-    /* width: 28%; */
+ 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -294,14 +290,14 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
   .SignUp {
     align-items: center;
-    /* border: 1px solid gray; */
+    
     padding:.3rem .6rem;
     border-radius: .6rem;
     font-weight: 500;
-    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+  
   }
   .Lunguage-Icon {
-    /* margin-left: 200px; */
+   
     font-size: 15px;
   }
 
@@ -324,13 +320,6 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   .second-nav-item>img{
 width: 14%;
   }
-
-  /* .use-mobile {
-    border: 1px solid #1565c0;
-  } */
-  /* .position{
-    display: flex;
-  } */
 
   .logo-name {
     border-top: 3px solid #4db6ac;
@@ -355,7 +344,6 @@ width: 14%;
     padding: 0px 5px;
     gap: 10px;
     justify-content: space-between;
-    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
 border:0px solid blue;
     width: 50%;
   }
@@ -378,9 +366,7 @@ border:0px solid blue;
     margin: auto;
     cursor: pointer;
   }
-  .size {
-    /* height: 300px; */
-  }
+ 
   .fixing-nav {
     position: sticky;
   }
@@ -401,7 +387,7 @@ border:0px solid blue;
 flex-direction: column;
 gap: .5rem;
 border-bottom: 1px solid gray;
-/* text-align: center; */
+
   }
   
 .second-nav-item>img{
@@ -412,7 +398,7 @@ height:50px;
     visibility: visible;
     font-size:18px;
     font-weight: 500;
-/* border:2px solid green; */
+
 padding:.5rem;
 cursor: pointer;
 border-radius: .8rem;

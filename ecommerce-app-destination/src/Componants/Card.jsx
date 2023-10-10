@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { AddToCartProduct, getAllCartProduct } from "../Redux/CartProductReducer/Type";
 import Login from "./Login";
 import Cookies from "js-cookie";
@@ -9,15 +9,15 @@ import { useToast } from "@chakra-ui/react";
 const Card = ({ item, index }) => {
   const token = Cookies.get("login_token");
   const admin = Cookies.get("login_role");
-  // const {isAuth}= useSelector(state=>state.UserReducer)
+
   const navigate = useNavigate();
- const dispatch=useDispatch()
-const toast= useToast()
- const data= useSelector(state=>state.CartProduct)
-//  console.log({Carddata:data});
+  const dispatch = useDispatch()
+  const toast = useToast()
+  const data = useSelector(state => state.CartProduct)
+
   const handleAddToCard = () => {
-    if(!token&&!admin){
-return navigate("/login")
+    if (!token && !admin) {
+      return navigate("/login")
     }
     let CartItem = {
       name: item.name,
@@ -27,45 +27,45 @@ return navigate("/login")
       image: item.image,
       price: item.price,
       rating: item.rating,
-      productCount:1,
-      productId:item._id
+      productCount: 1,
+      productId: item._id
     };
-    let bag=true;
+    let bag = true;
 
-    if(Array.isArray(data?.data)){
-  
-      for(let el of data?.data){
-        if(el.productId===item._id){
-          bag=false
+    if (Array.isArray(data?.data)) {
+
+      for (let el of data?.data) {
+        if (el.productId === item._id) {
+          bag = false
         }
       }
     }
-    if(bag){
-      dispatch(AddToCartProduct(CartItem)).then(res=>{
-        console.log({CartAded:res});
+    if (bag) {
+      dispatch(AddToCartProduct(CartItem)).then(res => {
+        console.log({ CartAded: res });
         dispatch(getAllCartProduct())
-        // alert("product added into the cart")
+
         toast({
           title: `product added into the cart`,
           position: "bottom",
           status: 'success',
           duration: 2000,
           isClosable: true,
+        })
       })
+    } else {
+
+      toast({
+        title: `product already added in cart"`,
+        position: "bottom",
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
       })
-    }else{
-// alert("product already added in cart")
-toast({
-  title: `product already added in cart"`,
-  position: "bottom",
-  status: 'error',
-  duration: 2000,
-  isClosable: true,
-})
 
     }
 
-   
+
   };
   return (
     <DIV key={index}>
@@ -108,19 +108,19 @@ toast({
               Rating :
             </p>
             <p>
-              {item.rating == 5 ? "★★★★★" : item.rating == 4 ? "★★★★" : item.rating == 3 ? "★★★"  : item.rating == 2 ? "★★"  : item.rating == 1 ? "★"  : "★★★★★★"}
+              {item.rating == 5 ? "★★★★★" : item.rating == 4 ? "★★★★" : item.rating == 3 ? "★★★" : item.rating == 2 ? "★★" : item.rating == 1 ? "★" : "★★★★★★"}
             </p>
           </div>
-          {/* <p>{item.details}</p> */}
+
           <div className="btn-box">
             <button
               onClick={() => {
-                if(!token&&!admin){
+                if (!token && !admin) {
                   return navigate("/login")
-                      }else{
-  
-                navigate(`/checkout/${item.price*80/100}`);
-                      }
+                } else {
+
+                  navigate(`/checkout/${item.price * 80 / 100}`);
+                }
               }}
               className="add-cart-btn"
             >
@@ -168,7 +168,7 @@ const DIV = styled.div`
     border: 0px solid blue;
     font-size: 16px;
     font-weight: 500;
-    /* width:6rem; */
+  
     text-align: center;
     border-radius: 5px;
     padding: 0.4rem 1rem;
@@ -179,13 +179,7 @@ const DIV = styled.div`
   .add-cart-btn:hover {
     background-color: #000000e4;
     color: #fff;
-    /* background-color: #0056b3; */
+   
   }
-  /* .page-btn:nth-child(2){
-    width:4rem;
-    font-size: 20px;
-    font-weight: 500;
-    text-align: center;
-
-  } */
+ 
 `;

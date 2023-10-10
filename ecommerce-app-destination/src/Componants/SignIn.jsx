@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-// import './RegistrationForm.css';
 import styled from "styled-components"
-import {useNavigate,Link} from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { useDispatch } from 'react-redux';
 import { RgisterRequest } from '../Redux/UserReducer/Type';
 import { useToast } from '@chakra-ui/react';
 function RegistrationForm() {
-  const navigate= useNavigate()
-  const dispatch=useDispatch()
-  const [pass,setPass]=useState("")
-  const toast=useToast()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [pass, setPass] = useState("")
+  const toast = useToast()
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -29,100 +28,98 @@ function RegistrationForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(pass!=formData.password){
+    if (pass != formData.password) {
       toast({
         title: `wrong password`,
         position: "bottom",
         status: 'error',
         duration: 3000,
         isClosable: true,
-    })
-    }else{
-      dispatch(RgisterRequest(formData)).then(res=>{
-        console.log({res})
-        
+      })
+    } else {
+      dispatch(RgisterRequest(formData)).then(res => {
+        console.log({ res })
+
         toast({
           title: `${res.message}`,
           position: "bottom",
           status: 'success',
           duration: 2000,
           isClosable: true,
+        })
+        setTimeout(() => {
+          navigate("/login")
+        }, 3000)
       })
-      setTimeout(()=>{
-        navigate("/login")
-      },3000)
-       })
     }
-    // You can add form validation and submission logic here
-   
-    // console.log(formData);
+
   };
 
 
   return (
     <DIV>
-    <div className="registration-container">
-   
-      <form className="registration-form" onSubmit={handleSubmit}>
-         <div className='extra-suggesion'>
-          <h1>Your gateway to exclusive offers and personalized shopping awaits. Register now!</h1>
-        </div>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      
-        <input
-          type="number"
-          name="age"
-          placeholder="Age"
-          value={formData.age}
-          onChange={handleChange}
-          required
-        />
-        
-        <input
-          type="text"
-          name="city"
-          placeholder="City"
-          value={formData.city}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-    
-          placeholder="Password"
-          value={pass}
-          onChange={e=>setPass(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Confirm Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Register</button>
-        <div className='already-account'>
-        <h1>Already account 👉<Link className="link" to="/login">Login here</Link></h1>
+      <div className="registration-container">
+
+        <form className="registration-form" onSubmit={handleSubmit}>
+          <div className='extra-suggesion'>
+            <h1>Your gateway to exclusive offers and personalized shopping awaits. Register now!</h1>
+          </div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="number"
+            name="age"
+            placeholder="Age"
+            value={formData.age}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            value={formData.city}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+
+            placeholder="Password"
+            value={pass}
+            onChange={e => setPass(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Confirm Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Register</button>
+          <div className='already-account'>
+            <h1>Already account 👉<Link className="link" to="/login">Login here</Link></h1>
+          </div>
+        </form>
       </div>
-      </form>
-    </div>
     </DIV>
   );
 }
@@ -130,9 +127,9 @@ function RegistrationForm() {
 export default RegistrationForm;
 
 
-const DIV=styled.div`
+const DIV = styled.div`
 border: 0px solid red;
-/* height: 60vh; */
+
 padding:2rem 0rem;
 width: 90%;
 margin:2rem auto;
@@ -155,7 +152,7 @@ width: 70%;
   border: 0px solid red;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
+ 
 }
 
 .registration-form {
@@ -163,20 +160,20 @@ width: 70%;
 display: flex;
 flex-direction: column;
   padding: 20px;
-  border: 1px solid #ccc; //#ccc
+  border: 1px solid #ccc;
   border-radius: 5px;
-  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
+
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: rgb(249, 249, 249);
 }
 
 input {
-    /* line:1px solid #007bff; */
+
 
   margin-bottom: 10px;
   padding: 10px 20px;
   width: 100%;
-  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+
   border:.1rem solid rgba(0, 0, 0, 0.24);
 }
 

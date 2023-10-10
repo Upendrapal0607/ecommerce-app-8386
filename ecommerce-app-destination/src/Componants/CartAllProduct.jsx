@@ -2,81 +2,81 @@ import { useNavigate } from "react-router-dom"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCartProduct } from "../Redux/CartProductReducer/Type";
-import {FontAwesomeIcon }from "@fortawesome/react-fontawesome"
-import {faShield} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faShield } from "@fortawesome/free-solid-svg-icons"
 import styled from "styled-components";
 import CartCard from "./CartCard";
-export const CartList=()=>{
-const dispatch= useDispatch();
-const data= useSelector(state=>state.CartProduct)
-// const [sum,setSum]= useState(0)
-    const navigate = useNavigate()
-console.log({data})
-    useEffect(()=>{
-      dispatch(getAllCartProduct()).then(res=>{
-        console.log({cartDatafromB:res});
-      })
-    },[])
-let sum=0
-if(data?.data){
-for(let el of data?.data){
-  sum+=el.price*el.productCount
+export const CartList = () => {
+  const dispatch = useDispatch();
+  const data = useSelector(state => state.CartProduct)
+
+  const navigate = useNavigate()
+  console.log({ data })
+  useEffect(() => {
+    dispatch(getAllCartProduct()).then(res => {
+      console.log({ cartDatafromB: res });
+    })
+  }, [])
+  let sum = 0
+  if (data?.data) {
+    for (let el of data?.data) {
+      sum += el.price * el.productCount
+    }
+
   }
 
-}
-  
-  let discount= (sum*20)/100
+  let discount = (sum * 20) / 100
 
-    return (
-      <DIV>
-       
+  return (
+    <DIV>
+
       <div className="every-card-box">
-        {data?.data?.map((el,index)=><CartCard key={index} item={el} index={index} />)}
+        {data?.data?.map((el, index) => <CartCard key={index} item={el} index={index} />)}
       </div>
       <div className="payment-details">
-     <div className="payment price">
-      <h1>PRICE DETAILS</h1>
-     </div>
-     <div className="payment">
-      <p>{`Price (${data?.data?.length} items)`}</p>
-      <p>{`₹${sum}`}</p>
-     </div>
-     <div className="payment">
-      <p>Discount</p>
-      <span>{`− ₹${discount}`}</span>
-     </div>
-     <div className="payment">
-      <p>Delivery Charges</p>
-      <div style={{display:'flex',gap:"4px"}}>
-      <p className="line-trought">₹80</p>
-      <span>Free</span>
-      </div>
-     </div>
-     <div className="payment total-amount">
-      <h2>Total Amount</h2>
-      <h2>{`₹${sum-discount}`}</h2>
-      
-     </div>
-     <div className="payment">
-      <span>{`You will save ₹${discount+80} on this order`}</span>
-      <p></p>
-     </div>
-     <div className="security">
-      <FontAwesomeIcon icon={faShield} className="secure-icon" />
-      <p> Safe and Secure Payments.Easy returns.100% Authentic products.</p>
+        <div className="payment price">
+          <h1>PRICE DETAILS</h1>
+        </div>
+        <div className="payment">
+          <p>{`Price (${data?.data?.length} items)`}</p>
+          <p>{`₹${sum}`}</p>
+        </div>
+        <div className="payment">
+          <p>Discount</p>
+          <span>{`− ₹${discount}`}</span>
+        </div>
+        <div className="payment">
+          <p>Delivery Charges</p>
+          <div style={{ display: 'flex', gap: "4px" }}>
+            <p className="line-trought">₹80</p>
+            <span>Free</span>
+          </div>
+        </div>
+        <div className="payment total-amount">
+          <h2>Total Amount</h2>
+          <h2>{`₹${sum - discount}`}</h2>
 
-     </div>
-     <div className="buttom">
-      <button onClick={()=>navigate(`/checkout/${sum-discount}`)}>PLACE ORDER</button>
-     </div>
+        </div>
+        <div className="payment">
+          <span>{`You will save ₹${discount + 80} on this order`}</span>
+          <p></p>
+        </div>
+        <div className="security">
+          <FontAwesomeIcon icon={faShield} className="secure-icon" />
+          <p> Safe and Secure Payments.Easy returns.100% Authentic products.</p>
+
+        </div>
+        <div className="buttom">
+          <button onClick={() => navigate(`/checkout/${sum - discount}`)}>PLACE ORDER</button>
+        </div>
       </div>
-      </DIV>
-    )
-     
-          
-  }
-  
-  const DIV= styled.div`
+    </DIV>
+  )
+
+
+}
+
+const DIV = styled.div`
 border:0px solid blue;
 margin:1rem auto;
 width: 98%;
@@ -153,7 +153,7 @@ border-top: 1px dashed gray;
 }
 
 .buttom{
-  /* border:3px solid red; */
+  
   width: 200px;
   margin:auto;
   text-align: center;
@@ -192,7 +192,5 @@ border-top: 1px dashed gray;
   margin: auto;
  }
 }
-/* @media only screen and (min-width: 667px) and (max-width: 920px) {
 
-} */
 `

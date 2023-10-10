@@ -1,128 +1,96 @@
 import React, { useEffect, useState } from 'react';
-// import './RegistrationForm.css';
 import styled from "styled-components"
-import {useNavigate,Link} from "react-router-dom"
-const InitialData={
+import { useNavigate, Link } from "react-router-dom"
+const InitialData = {
   category: "",
   name: "",
   image: "",
   rating: "",
   price: "",
-  details:"",
+  details: "",
   gender: ""
 }
 
-function AdminForm({handleAdd}) {
-  const navigate= useNavigate()
+function AdminForm({ handleAdd }) {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState(InitialData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: (name=="price"||name=="rating")?+value:value,
+      [name]: (name == "price" || name == "rating") ? +value : value,
     });
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // You can add form validation and submission logic here
-  //   console.log(formData);
-  //   // navigate("/adminlogin")
-  // };
-
-
   return (
     <DIV>
-    <div className="registration-container">
-   
-      <form className="registration-form" onSubmit={(e)=>handleAdd(e,formData,setFormData)}>
-         {/* <div className='extra-suggesion'>
-          <h1>Empower your e-commerce journey as an admin. Register today and take charge of your online store.</h1>
-        </div> */}
-        <input
-          type="text"
-          name="name"
-          placeholder="Title"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      <select name="category"  value={formData.category} onChange={handleChange} id="" placeholder='Select Category'  required>
-          <option value="">Select Category</option>
-          <option value="cloth">Cloth</option>
-          <option value="dress-cloth">Dress Related Cloth</option>
-          <option value="wedding-cloth">Wedding Cloth</option>
-          <option value="grocery">Grocery Product</option>
-          <option value="shoes">Shoes</option>
-          <option value="gift">Gift</option>
-          <option value="jewelary">Jewelary</option>
-          <option value="belt">Belt</option>
-          <option value="other">Other</option>
-        </select>
-        {/* <input
-          type="text"
-          name="category"
-          placeholder="Category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-        />
-         */}
-        <input
-          type="text"
-          name="image"
-          placeholder="Image URL"
-          value={formData.image}
-          onChange={handleChange}
-          required
-        />
-         <select name="rating" value={formData.rating} onChange={handleChange} id="" placeholder='Select Rating'>
-          <option value="">Select Rating</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-        </select>
-        {/* <input
-          type="number"
-          name="rating"
-          placeholder="Rating"
-          value={formData.rating}
-          onChange={handleChange}
-          required
-        /> */}
-        <input
-          type="number"
-          name="price"
-          placeholder="Price"
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
-        <select name="gender" value={formData.gender} onChange={handleChange} id="" placeholder='Select Gender'>
-          <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="kids">Kids</option>
-        </select>
-        <textarea
-          type="text"
-          name="details"
-          placeholder="Description"
-          value={formData.details}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">ADD</button>
-        {/* <div className='already-account'>
-        <h1>Already Account 👉<Link className="link" to="/adminlogin">Login here</Link></h1>
-      </div> */}
-      </form>
-      
-    </div>
+      <div className="registration-container">
+
+        <form className="registration-form" onSubmit={(e) => handleAdd(e, formData, setFormData)}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Title"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <select name="category" value={formData.category} onChange={handleChange} id="" placeholder='Select Category' required>
+            <option value="">Select Category</option>
+            <option value="cloth">Cloth</option>
+            <option value="dress-cloth">Dress Related Cloth</option>
+            <option value="wedding-cloth">Wedding Cloth</option>
+            <option value="grocery">Grocery Product</option>
+            <option value="shoes">Shoes</option>
+            <option value="gift">Gift</option>
+            <option value="jewelary">Jewelary</option>
+            <option value="belt">Belt</option>
+            <option value="other">Other</option>
+          </select>
+          <input
+            type="text"
+            name="image"
+            placeholder="Image URL"
+            value={formData.image}
+            onChange={handleChange}
+            required
+          />
+          <select name="rating" value={formData.rating} onChange={handleChange} id="" placeholder='Select Rating'>
+            <option value="">Select Rating</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+          <input
+            type="number"
+            name="price"
+            placeholder="Price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+          <select name="gender" value={formData.gender} onChange={handleChange} id="" placeholder='Select Gender'>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="kids">Kids</option>
+          </select>
+          <textarea
+            type="text"
+            name="details"
+            placeholder="Description"
+            value={formData.details}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">ADD</button>
+
+        </form>
+
+      </div>
     </DIV>
   );
 }
@@ -130,25 +98,19 @@ function AdminForm({handleAdd}) {
 export default AdminForm;
 
 
-const DIV=styled.div`
-border: 0px solid red;
-/* height: 60vh; */
-/* padding:2rem 0rem; */
-/* overscroll-behavior-y: -2; */
+const DIV = styled.div`
 width: 30%;
 margin:2rem auto;
 color: #000000d6;
 position: relative;
-/* background-image: url("https://img.freepik.com/free-vector/online-shopping-landing-page_33099-1725.jpg"); */
+
 
 .extra-suggesion{
 font-size:18px;
 font-weight: 500;
 color:#6b5697;
 padding: 1rem 0rem;
-/* width: 100%; */
-border:0px solid green;
-/* text-align: center; */
+
 
 }
 .registration-container {
@@ -160,7 +122,7 @@ border:0px solid green;
   border: 0px solid red;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
+ 
 }
 
 .registration-form {
@@ -168,20 +130,20 @@ border:0px solid green;
 display: flex;
 flex-direction: column;
   padding: 20px;
-  border: 1px solid #ccc; //#ccc
+  border: 1px solid #ccc;
   border-radius: 5px;
-  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
+ 
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: rgb(249, 249, 249);
 }
 
 input ,textarea,select{
-    /* line:1px solid #007bff; */
+  
 
   margin-bottom: 10px;
   padding: 10px 20px;
   width: 100%;
-  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+
   border:.1rem solid rgba(0, 0, 0, 0.24);
 }
 
@@ -223,7 +185,7 @@ button:hover {
     }
     .registration-form{
         width: 100%;
-        /* flex-direction: row; */
+        
     }
     .extra-suggesion{
         width: 100%;

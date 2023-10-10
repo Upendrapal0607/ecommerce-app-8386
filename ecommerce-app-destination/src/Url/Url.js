@@ -1,4 +1,4 @@
-export const AdminUrl="http://localhost:8080/admins"
-export const UserUrl="http://localhost:8080/users"
-export const ProductUrl="http://localhost:8080/products"
-export const CartProductUrl="http://localhost:8080/cart"
+export const AdminUrl = "https://pink-filthy-lovebird.cyclic.app/admins"
+export const UserUrl = "https://pink-filthy-lovebird.cyclic.app/users"
+export const ProductUrl = "https://pink-filthy-lovebird.cyclic.app/products"
+export const CartProductUrl = "https://pink-filthy-lovebird.cyclic.app/cart"

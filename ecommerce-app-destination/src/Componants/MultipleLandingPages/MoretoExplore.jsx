@@ -2,9 +2,7 @@ import Product from "../../db.json";
 import "./Landing.css";
 import { Link } from "react-router-dom";
 export function MoretoExplore() {
-  // const style1={
 
-  // }
   return (
     <div>
       <div className="top-rated-picked-2">
@@ -24,7 +22,7 @@ export function MoretoExplore() {
                 <p>{item.star}</p>
                 <p>{item.details}</p>
                 <div>
-                  <Link to={item.id==2?"/Product?category=other":"/Product?category=cloth"} style={{ color: "blue" }}>
+                  <Link to={item.id == 2 ? "/Product?category=other" : "/Product?category=cloth"} style={{ color: "blue" }}>
                     Shop Now
                   </Link>
                 </div>

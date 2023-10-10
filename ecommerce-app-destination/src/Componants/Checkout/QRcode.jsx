@@ -7,15 +7,15 @@ import { Button } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 
 
-function QRcode({amount}) {
-const navigate=useNavigate()
+function QRcode({ amount }) {
+  const navigate = useNavigate()
   const [IspayTrue, setIsPayTrue] = React.useState({
     google: true,
     phone: false,
     paytm: false
   })
 
-  const handleNAvigate=()=>{
+  const handleNAvigate = () => {
     navigate("/")
   }
   const { google, phone, paytm } = IspayTrue
@@ -59,12 +59,12 @@ const navigate=useNavigate()
         <img src={Paytmimg} alt="QR code" />
       </div>}
 
-      <Button  m={"1rem"}  w={"90%"} variant='solid'>
-    {`Scan QR code Pay ${amount}`}
-  </Button>
-      <Button onClick={handleNAvigate}  m={"1rem"}  w={"90%"} colorScheme='teal' variant='solid'>
-    GO BACK TO HOME PAGE
-  </Button>
+      <Button m={"1rem"} w={"90%"} variant='solid'>
+        {`Scan QR code Pay ${amount}`}
+      </Button>
+      <Button onClick={handleNAvigate} m={"1rem"} w={"90%"} colorScheme='teal' variant='solid'>
+        GO BACK TO HOME PAGE
+      </Button>
     </div>
   )
 

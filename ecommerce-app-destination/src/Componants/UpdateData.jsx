@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-// import './RegistrationForm.css';
+
 import styled from "styled-components"
 import { useNavigate, Link } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 function UpdateData({ id, handleUpdata }) {
-  // console.log({id})
+
   const navigate = useNavigate()
   const Data = useSelector(state => state.ProductReducer.Product.data)
   const [formData, setFormData] = useState({});
   useEffect(() => {
-    // EditebleData&&EditebleData[0]||
+
     let EditebleData = Data?.filter(el => el._id == id)
     EditebleData && setFormData(EditebleData[0])
   }, [id])
@@ -28,9 +28,7 @@ function UpdateData({ id, handleUpdata }) {
       <div className="registration-container">
 
         <form className="registration-form" onSubmit={(e) => handleUpdata(e, formData)}>
-          {/* <div className='extra-suggesion'>
-          <h1>Empower your e-commerce journey as an admin. Register today and take charge of your online store.</h1>
-        </div> */}
+
           <input
             type="text"
             name="name"
@@ -52,14 +50,6 @@ function UpdateData({ id, handleUpdata }) {
             <option value="other">Other</option>
           </select>
 
-          {/* <input
-          type="text"
-          name="category"
-          placeholder="Category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-        /> */}
 
           <input
             type="text"
@@ -78,14 +68,7 @@ function UpdateData({ id, handleUpdata }) {
             <option value="5">5</option>
             <option value="6">6</option>
           </select>
-          {/* <input
-          type="number"
-          name="rating"
-          placeholder="Rating"
-          value={formData.rating}
-          onChange={handleChange}
-          required
-        /> */}
+
           <input
             type="number"
             name="price"
@@ -109,9 +92,7 @@ function UpdateData({ id, handleUpdata }) {
             required
           />
           <button type="submit">UPDATE</button>
-          {/* <div className='already-account'>
-        <h1>Already Account 👉<Link className="link" to="/adminlogin">Login here</Link></h1>
-      </div> */}
+
         </form>
 
       </div>
@@ -124,22 +105,20 @@ export default UpdateData;
 
 const DIV = styled.div`
 border: 0px solid red;
-/* height: 60vh; */
-/* padding:2rem 0rem; */
-/* overscroll-behavior-y: -2; */
+
 width: 30%;
 margin:2rem auto;
 color: #000000d6;
-/* background-image: url("https://img.freepik.com/free-vector/online-shopping-landing-page_33099-1725.jpg"); */
+
 
 .extra-suggesion{
 font-size:18px;
 font-weight: 500;
 color:#6b5697;
 padding: 1rem 0rem;
-/* width: 100%; */
+
 border:2px solid green;
-/* text-align: center; */
+
 
 }
 .registration-container {
@@ -151,7 +130,7 @@ border:2px solid green;
   border: 0px solid red;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
+ 
 }
 
 .registration-form {
@@ -159,20 +138,20 @@ border:2px solid green;
 display: flex;
 flex-direction: column;
   padding: 20px;
-  border: 1px solid #ccc; //#ccc
+  border: 1px solid #ccc; 
   border-radius: 5px;
-  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
+
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: rgb(249, 249, 249);
 }
 
 input ,textarea,select{
-    /* line:1px solid #007bff; */
+    
 
   margin-bottom: 10px;
   padding: 10px 20px;
   width: 100%;
-  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+ 
   border:.1rem solid rgba(0, 0, 0, 0.24);
 }
 
@@ -214,7 +193,7 @@ button:hover {
     }
     .registration-form{
         width: 100%;
-        /* flex-direction: row; */
+       
     }
     .extra-suggesion{
         width: 100%;

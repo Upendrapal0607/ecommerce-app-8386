@@ -1,9 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import logo1 from '../TopImagePoster1.jpg';
 import logo1 from "../../Images/TopImagePoster1.jpg";
 import logo2 from "../../Images/Refarmation.jpg";
-// import logo2 from '../Image/Refarmation.jpg';
 import "./Landing.css";
 export function TopPoster() {
   const navigate = useNavigate();

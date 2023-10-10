@@ -11,48 +11,48 @@ import ProductNotFound from '../Componants/ProductNotFound'
 import { getAllCartProduct } from '../Redux/CartProductReducer/Type'
 
 const Product = () => {
-const dispatch= useDispatch()
-const {Products,isLoading,isError}= useSelector(state=>state.UserProductReducer)
-const location = useLocation()
-const [page,setPage]= useState(1)
-const [SearchPrarams,setSeachParams]=useSearchParams();
-const [SearchPrarams2,setSeachParams2]=useSearchParams();
+  const dispatch = useDispatch()
+  const { Products, isLoading, isError } = useSelector(state => state.UserProductReducer)
+  const location = useLocation()
+  const [page, setPage] = useState(1)
+  const [SearchPrarams, setSeachParams] = useSearchParams();
+  const [SearchPrarams2, setSeachParams2] = useSearchParams();
 
-useEffect(()=>{
-     dispatch(getAllCartProduct())
-},[])
-useEffect(()=>{
-  let paramObj = {
-    params: {
-      page:page,
-      limit:8,
-      gender: SearchPrarams.getAll("gender"),
-      category: SearchPrarams.get("category"),
-      rating: SearchPrarams.get("rating"),
-      sort: SearchPrarams.get("sortBy") && "price",
-      order: SearchPrarams.get("sortBy"),
-      q:SearchPrarams2.get("q")
-    },
-  };
-  
-dispatch(getAllProduct(paramObj)).then(res=>{
-  
-})
-},[page,location])
+  useEffect(() => {
+    dispatch(getAllCartProduct())
+  }, [])
+  useEffect(() => {
+    let paramObj = {
+      params: {
+        page: page,
+        limit: 8,
+        gender: SearchPrarams.getAll("gender"),
+        category: SearchPrarams.get("category"),
+        rating: SearchPrarams.get("rating"),
+        sort: SearchPrarams.get("sortBy") && "price",
+        order: SearchPrarams.get("sortBy"),
+        q: SearchPrarams2.get("q")
+      },
+    };
+
+    dispatch(getAllProduct(paramObj)).then(res => {
+
+    })
+  }, [page, location])
 
   return (
     <DIV>
-    {isError?< ErrorLoad/>:<div className='produc-main-box'>
+      {isError ? < ErrorLoad /> : <div className='produc-main-box'>
         <SideNavbar />
-        {isLoading?< Loader/>:<div className='product-page'>
-       {(Products?.data?.length<=0)?<ProductNotFound />:<AllProduct data={Products.data} />}
-       <div className='btn-box'>
-        <button className='page-btn' disabled= {page==1} onClick={()=>setPage(prev=>prev-1)}>{"<"}</button>
-        <button className='page-btn'>{page}</button>
-        <button className='page-btn' disabled= {page==Products.totalPages} onClick={()=>setPage(prev=>prev+1)}>{">"}</button>
-       </div>
+        {isLoading ? < Loader /> : <div className='product-page'>
+          {(Products?.data?.length <= 0) ? <ProductNotFound /> : <AllProduct data={Products.data} />}
+          <div className='btn-box'>
+            <button className='page-btn' disabled={page == 1} onClick={() => setPage(prev => prev - 1)}>{"<"}</button>
+            <button className='page-btn'>{page}</button>
+            <button className='page-btn' disabled={page == Products.totalPages} onClick={() => setPage(prev => prev + 1)}>{">"}</button>
+          </div>
         </div>}
-       
+
       </div>}
     </DIV>
   )
@@ -60,7 +60,7 @@ dispatch(getAllProduct(paramObj)).then(res=>{
 
 export default Product
 
-const DIV= styled.div`
+const DIV = styled.div`
 
 .product-page{
     border: 0px solid blue;
@@ -97,12 +97,12 @@ gap:1rem;
     border-radius: 5px;
     background-color: #00000092;
 color:#fff;
-    /* background-color: #007bff; */
+    
   }
   .page-btn:hover{
     background-color: #000000e4;
     color: #fff;
-    /* background-color: #0056b3; */
+    
   }
   .page-btn:nth-child(2){
     width:4rem;

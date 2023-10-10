@@ -2,22 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 import Card from './Card'
 
-// import { Card, CardHeader, CardBody, CardFooter, VStack,HStack, Image,Text,Heading,Button } from '@chakra-ui/react'
 
-const AllProduct = ({data}) => {
-  // console.log({data});
+
+const AllProduct = ({ data }) => {
+
   return (
     <DIV>
-    <div className="every-card-box">
-      {data?.map((el,index)=><Card key={index} item={el} index={index} />)}
-    </div>
+      <div className="every-card-box">
+        {data?.map((el, index) => <Card key={index} item={el} index={index} />)}
+      </div>
     </DIV>
   )
 }
 
 export default AllProduct
 
-const DIV= styled.div`
+const DIV = styled.div`
 border:0px solid blue;
 margin: auto;
 width: 100%;

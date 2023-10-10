@@ -2,10 +2,10 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from "styled-components"
 const EmtyCart = () => {
-  const navigate= useNavigate()
+  const navigate = useNavigate()
   return (
     <DIV>
-      <div className='Empty' onClick={()=>navigate("/Product")}>
+      <div className='Empty' onClick={() => navigate("/Product")}>
         <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/c1a552112421559.Y3JvcCwxMzczLDEwNzQsMzMsMA.jpg" alt="" />
       </div>
     </DIV>
@@ -14,7 +14,7 @@ const EmtyCart = () => {
 
 export default EmtyCart
 
-const DIV= styled.div`
+const DIV = styled.div`
 .Empty{
 width: 50%;
 margin: auto;

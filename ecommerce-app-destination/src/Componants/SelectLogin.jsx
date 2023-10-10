@@ -2,29 +2,29 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from "styled-components"
 const SelectLogin = () => {
-  return (
-    <DIV>
-   <div className="select-login-option">
-<div className="option">
-<Link className='login' to="/login">
-User Login
-</Link>
-</div>
-<div className="option">
-<Link className='login' to="/adminlogin">
-Admin Login
-</Link>
-</div>
-   </div>
-    </DIV>
-  )
+    return (
+        <DIV>
+            <div className="select-login-option">
+                <div className="option">
+                    <Link className='login' to="/login">
+                        User Login
+                    </Link>
+                </div>
+                <div className="option">
+                    <Link className='login' to="/adminlogin">
+                        Admin Login
+                    </Link>
+                </div>
+            </div>
+        </DIV>
+    )
 }
 
 export default SelectLogin
 
-const DIV= styled.div`
+const DIV = styled.div`
 border: 0px solid red;
-/* height: 60vh; */
+
 padding: 2rem;
 width: 90%;
 margin:2rem auto;
@@ -55,7 +55,7 @@ background-image: url("https://img.freepik.com/free-vector/online-shopping-landi
     font-weight: 550;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-    /* text-align:center; */
+ 
 }
 .option:hover{
     border:4px solid #4c00ff;

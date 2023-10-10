@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 // import './AdminLogin.css';
 import styled from "styled-components"
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AdminUrl } from '../Url/Url';
 import Cookies from 'js-cookie';
 import { useToast } from '@chakra-ui/react';
-const initialData={
+const initialData = {
   email: '',
   password: '',
- 
+
 }
 function AdminLogin() {
-  const toast=useToast()
-    const navigate=useNavigate()
+  const toast = useToast()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState(initialData);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,107 +25,75 @@ function AdminLogin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can add form validation and submission logic here
-    axios.post(`${AdminUrl}/login`,formData).then(res=>{
+    axios.post(`${AdminUrl}/login`, formData).then(res => {
       console.log(res.data);
-      if(res.data.message=="login successful"){
+      if (res.data.message == "login successful") {
         console.log("hello admin")
-        Cookies.set("login_token",`${res.data.token}`,{expires:7})
-          Cookies.set("login_name",`${res.data.Admin.name}`,{expires:7})
-          Cookies.set("login_email",`${res.data.Admin.email}`,{expires:7})
-          res.data.login_role==="admin"?Cookies.set("login_role","admin",{expires:7}):Cookies.set("login_role","user",{expires:7});
-          toast({
-            title: `${res.data.message}`,
-            position: "bottom",
-            status: 'success',
-            duration: 2000,
-            isClosable: true,
+        Cookies.set("login_token", `${res.data.token}`, { expires: 7 })
+        Cookies.set("login_name", `${res.data.Admin.name}`, { expires: 7 })
+        Cookies.set("login_email", `${res.data.Admin.email}`, { expires: 7 })
+        res.data.login_role === "admin" ? Cookies.set("login_role", "admin", { expires: 7 }) : Cookies.set("login_role", "user", { expires: 7 });
+        toast({
+          title: `${res.data.message}`,
+          position: "bottom",
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
         })
-          
-          navigate("/productmodify")
-      }else{
-        // alert(res.data.message)
+
+        navigate("/productmodify")
+      } else {
+
         toast({
           title: `${res.data.message}`,
           position: "bottom",
           status: 'error',
           duration: 2000,
           isClosable: true,
-      })
+        })
       }
 
       setFormData(initialData)
-    }).catch(err=>{
+    }).catch(err => {
 
     })
-    // console.log(formData);
+
   };
 
 
   return (
     <DIV>
-    <div className="registration-container">
-   
-      <form className="registration-form" onSubmit={handleSubmit}>
-         <div className='extra-suggesion'>
-          <h1>Admins, your portal to e-commerce excellence awaits. Log in to rejoin the battlefield and take control of your online shopping empire.</h1>
-        </div>
-        {/* <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        /> */}
-      
-        {/* <input
-          type="number"
-          name="age"
-          placeholder="Age"
-          value={formData.age}
-          onChange={handleChange}
-          required
-        />
-         */}
-        {/* <input
-          type="text"
-          name="city"
-          placeholder="City"
-          value={formData.city}
-          onChange={handleChange}
-          required
-        /> */}
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        {/* <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          required
-        /> */}
-        <button type="submit">ADMIN LOGIN</button>
-        <div className='already-account'>
-        <h1>Create Account 👉<Link className="link" to="/adminregister">signup here</Link></h1>
+      <div className="registration-container">
+
+        <form className="registration-form" onSubmit={handleSubmit}>
+          <div className='extra-suggesion'>
+            <h1>Admins, your portal to e-commerce excellence awaits. Log in to rejoin the battlefield and take control of your online shopping empire.</h1>
+          </div>
+
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+
+          <button type="submit">ADMIN LOGIN</button>
+          <div className='already-account'>
+            <h1>Create Account 👉<Link className="link" to="/adminregister">signup here</Link></h1>
+          </div>
+        </form>
       </div>
-      </form>
-    </div>
     </DIV>
   );
 }
@@ -133,9 +101,8 @@ function AdminLogin() {
 export default AdminLogin;
 
 
-const DIV=styled.div`
-border: 0px solid red;
-/* height: 60vh; */
+const DIV = styled.div`
+
 width: 90%;
 margin:2rem auto;
 padding:2rem 0rem;
@@ -158,7 +125,7 @@ width: 70%;
   border: 0px solid red;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
+  
 }
 
 .registration-form {
@@ -166,20 +133,18 @@ width: 70%;
 display: flex;
 flex-direction: column;
   padding: 20px;
-  border: 1px solid #ccc; //#ccc
+  border: 1px solid #ccc; 
   border-radius: 5px;
-  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
+  
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: rgb(249, 249, 249);
 }
 
 input {
-    /* line:1px solid #007bff; */
-
   margin-bottom: 10px;
   padding: 10px 20px;
   width: 100%;
-  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+
   border:.1rem solid rgba(0, 0, 0, 0.24);
 }
 

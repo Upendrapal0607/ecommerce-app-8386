@@ -3,19 +3,19 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const ErrorLoad = () => {
-    const navigate= useNavigate()
-    const NavigateHomePage=()=>{
+    const navigate = useNavigate()
+    const NavigateHomePage = () => {
         navigate("/")
     }
-  return (
-    <DIV>
-    <div className="error-message">
-      <h1>There is something wrong please try again letar</h1>
-      <img src="https://www.thoughtco.com/thmb/RyA4XYHdLAqrgpPvf9qWPuoeRRw=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/images-not-loading-4072206-7a285a9f474f4f2896c33b7f8efda969.png" alt="Error" />
-   <button onClick={NavigateHomePage} className='ok-btn'>OK</button>
-    </div>
-    </DIV>
-  )
+    return (
+        <DIV>
+            <div className="error-message">
+                <h1>There is something wrong please try again letar</h1>
+                <img src="https://www.thoughtco.com/thmb/RyA4XYHdLAqrgpPvf9qWPuoeRRw=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/images-not-loading-4072206-7a285a9f474f4f2896c33b7f8efda969.png" alt="Error" />
+                <button onClick={NavigateHomePage} className='ok-btn'>OK</button>
+            </div>
+        </DIV>
+    )
 }
 
 export default ErrorLoad
