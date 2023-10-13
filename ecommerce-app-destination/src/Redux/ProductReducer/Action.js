@@ -1,7 +1,9 @@
 import axios from "axios"
 import Cookies from "js-cookie";
 import { DELETE_REQUEST_SUCCESS, GET_REQUEST_SUCCESS, POST_REQUEST_SUCCESS, PRODUCT_REQUEST, PRODUCT_REQUEST_FAIL, UPDATE_REQUEST_SUCCESS } from "./ActionType"
-const URL = "http://localhost:8080/products"
+import { ProductUrl } from "../../Url/Url";
+// const URL = "http://localhost:8080/products"
+const URL= ProductUrl
 const token = Cookies.get("login_token");
 export const getAllProduct = payload => async dispatch => {
     try {
