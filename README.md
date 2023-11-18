@@ -35,7 +35,8 @@ User Features :
 - Product list & Single product page
 - Cart page
 - Payment page
-- Fully responsive
+- Searching functionality
+- Fully responsive and dinamic 
 ## Run Locally
 
 Clone the project
@@ -66,22 +67,22 @@ Install dependencies
 ## Screenshots
 
 ## LANDING PAGE
-[![Home.jpg](https://i.postimg.cc/NGkLQ9j0/Lansing-PAge.png)](https://postimg.cc/XpWKXJsm)
+
 
 ## Login
-[![Songs.jpg](https://i.postimg.cc/VN6zJXCY/Songs.png)](https://postimg.cc/XpWKXJsm)
+
 
 ## Cart
-[![LikedSongs.jpg](https://i.postimg.cc/bw9jtb4G/Liked.png)](https://postimg.cc/r0FHWjy0)
+
 
 ## Product
-[![Single-Product.jpg](https://i.postimg.cc/d1kC3qD0/Screenshot-2023-10-03-162640.png)](https://postimg.cc/8fz7VpWf)
+
 
 ## Single Product
-[![LOGIN.jpg](https://i.postimg.cc/wxL4MzCM/Login-Page.png)](https://postimg.cc/7bznNLmP)
+
 
 ## Payment page 
-[![Forgot-Password.jpg](https://i.postimg.cc/h4MJnz20/Screenshot-2023-10-03-162002.png)](https://postimg.cc/sMHWzFw0)
+
 
 
 
