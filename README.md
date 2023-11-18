@@ -13,6 +13,8 @@ Welcome to DREAM PARK, your ultimate destination for all kind of product like cl
 
 ## Backend Deployed Link
 [Server Link:  DREAM PARK](https://dream-park-backend.onrender.com/)
+## Backend GitHub Link
+[Server Link:  DREAM PARK](https://github.com/Upendrapal0607/ecommerce-app-8386-back-end)
 
 ## Tech Stack
 <div>
@@ -42,7 +44,7 @@ User Features :
 Clone the project
 
 ```bash
-  git clone https://github.com/Upendrapal0607/ecommerce-app-8386.git
+  git clone https://github.com/Upendrapal0607/ecommerce-app-8386
 ```
 
 Go to the project directory
