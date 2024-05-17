@@ -10,11 +10,15 @@ const SideNavbar = () => {
   const [gender, setGender] = useState(initialGender || []);
   let initialCategory = SearchPrarams.get("category");
   const [category, setCategory] = useState(initialCategory || "");
-  let initialRating = SearchPrarams.get("Rating")
+  let initialRating = SearchPrarams.get("rating")
   const [rating, setRating] = useState(initialRating || "")
   let initialSortParams = SearchPrarams.get("sortBy");
   const [sortBy, setSortBy] = useState(initialSortParams || "");
-
+  let intialStart = SearchPrarams.get("fromPrice")||"";
+  const [fromPrice,SetFromPrice] = useState(intialStart);
+  let intialEnd = SearchPrarams.get("toPrice")||"";
+  const [toPrice,SetToPrice] = useState(intialEnd);
+// console.log({fromPrice,toPrice});
 
   useEffect(() => {
     let Params = {};
@@ -22,8 +26,10 @@ const SideNavbar = () => {
     gender && (Params.gender = gender)
     sortBy && (Params.sortBy = sortBy)
     rating && (Params.rating = rating)
+    fromPrice && (Params.fromPrice = fromPrice)
+    toPrice && (Params.toPrice = toPrice)
     setSeachParams(Params);
-  }, [category, gender, sortBy, rating])
+  }, [category, gender, sortBy, rating,fromPrice,toPrice])
 
   const handleGenderFilter = (e) => {
     const { value } = e.target;
@@ -47,21 +53,22 @@ const SideNavbar = () => {
   const handleCategoryFilter = (e) => {
     const { value } = e.target;
     value == category ? setCategory(null) : setCategory(value);
-    // const {value}=e.target;
-    // let NewCategory=[...category];
-    // if(NewCategory.includes(value)) NewCategory=NewCategory.filter(item=>item!=value);
-    // else NewCategory.push(value);
-    // setCategory(NewCategory)
-    //     const { value } = e.target;
-    //     let newCategory = [...category];
-    //     if (newCategory.includes(value))
-    //       newCategory = newCategory.filter((el) => el != value);
-    //     else newCategory.push(value);
-    //     setCategory(newCategory);
+
   };
   const handlesortBy = (e) => {
     const { value } = e.target;
     value == sortBy ? setSortBy(null) : setSortBy(value);
+  };
+
+  const handlPriceFilter = () =>{
+   if(fromPrice&&toPrice){
+     SetFromPrice("")
+     SetToPrice("")
+
+   }else{
+    SetFromPrice(100)
+    SetToPrice(1000)
+   }
   };
 
   return (
@@ -90,7 +97,12 @@ const SideNavbar = () => {
           />
           <label>Descending</label>
         </div>
+        <div className="base-one-price">
+          <input type="checkbox"  checked={fromPrice}/>
+       <button className="hundred-to-thousent" onClick={handlPriceFilter}>100₹ to 1000₹</button>
       </div>
+      </div>
+    
       <div>
         <h3 className="Filter-type">Filter By Gender</h3>
         <div>
@@ -186,6 +198,12 @@ const DIV = styled.div`
     color:black;
   
   }
+  /* .hundred-to-thousent{
+    padding: 2px 8px;
+    box-sizing: border-box;
+    border-radius: 4px;
+  border: 1px solid gray;
+  } */
 
   @media only screen and (min-width: 280px) and (max-width: 667px) {
     display: grid;

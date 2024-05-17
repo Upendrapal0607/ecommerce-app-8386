@@ -17,6 +17,7 @@ const Product = () => {
   const [page, setPage] = useState(1)
   const [SearchPrarams, setSeachParams] = useSearchParams();
   const [SearchPrarams2, setSeachParams2] = useSearchParams();
+  console.log(SearchPrarams.get("intialStart"), SearchPrarams.get("intialEnd"));
 
   useEffect(() => {
     dispatch(getAllCartProduct())
@@ -31,10 +32,12 @@ const Product = () => {
         rating: SearchPrarams.get("rating"),
         sort: SearchPrarams.get("sortBy") && "price",
         order: SearchPrarams.get("sortBy"),
+        fromPrice: SearchPrarams.get("fromPrice"),
+        toPrice: SearchPrarams.get("toPrice"),
         q: SearchPrarams2.get("q")
       },
     };
-
+console.log(paramObj);
     dispatch(getAllProduct(paramObj)).then(res => {
 
     })
